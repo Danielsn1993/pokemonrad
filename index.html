@@ -829,7 +829,7 @@
   <div id="orientation-warning">
     <div class="rotate-icon">📱</div>
     <h1>VIRE SEU CELULAR</h1>
-    <p>Este jogo funciona apenas<br>no modo retrato (portrait)</p>
+    <p>Este jogo funciona apenas<br>no modo paisagem (landscape)</p>
   </div>
 
 
@@ -1134,32 +1134,15 @@
     function checkOrientation() {
       const warning = document.getElementById('orientation-warning');
       const container = document.querySelector('.container');
-      const warningText = warning.querySelector('p');
       
-      // Detecta se é mobile
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                      || window.innerWidth < 768;
-      
-      if (isMobile) {
-        // MOBILE: funciona apenas em PORTRAIT
-        if (window.innerWidth > window.innerHeight) {
-          warning.classList.add('show');
-          container.style.display = 'none';
-          warningText.innerHTML = 'Este jogo funciona apenas<br>no modo retrato (portrait)';
-        } else {
-          warning.classList.remove('show');
-          container.style.display = 'block';
-        }
+      if (window.innerHeight > window.innerWidth) {
+        // Portrait - mostra aviso
+        warning.classList.add('show');
+        container.style.display = 'none';
       } else {
-        // DESKTOP: funciona apenas em LANDSCAPE
-        if (window.innerHeight > window.innerWidth) {
-          warning.classList.add('show');
-          container.style.display = 'none';
-          warningText.innerHTML = 'Este jogo funciona melhor<br>em tela wide (landscape)';
-        } else {
-          warning.classList.remove('show');
-          container.style.display = 'block';
-        }
+        // Landscape - funciona normalmente
+        warning.classList.remove('show');
+        container.style.display = 'block';
       }
     }
 
@@ -1248,14 +1231,14 @@
     const rawQuestionsText = `
 
 QUESTÃO 1
+https://s3.amazonaws.com/brainscape-prod/system/cm/624/838/248/q_image_ios.?1756901518
+Paciente apresenta inversão do fluxo da artéria vertebral esquerda. Qual a possibilidade diagnóstica?
 
-NÃO INTERESSA
-
-A) 0
-B) 0
-C) AQUI
-D) 0
-E) 0
+A) Hipoplasia da artéria vertebral esquerda.
+B) Hipoplasia da artéria vertebral direita.
+C) Estenose da artéria subclávia esquerda.
+D) Estenose da artéria subclávia direita.
+E) AVC isquêmico em território de artéria basilar.
 GABARITO: C
 
 `;
