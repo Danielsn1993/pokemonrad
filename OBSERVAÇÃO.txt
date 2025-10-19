@@ -1,0 +1,3 @@
+O código do jogo atualizado, tanto online quanto offline, está no google script do "LAUDO TOMOGRAFIA". Colar o código de lá no bloco de notas, "salvar como" colocando o tipo de arquivo em "todos os arquivos" e o nome como "pokemon.html". 
+
+O arquivo "pokemon.html" deve estar no mesmo lugar que "pokemon_assets" e "questao_imagens" para o jogo funcionar offline!
