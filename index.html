@@ -829,8 +829,9 @@
   <div id="orientation-warning">
     <div class="rotate-icon">📱</div>
     <h1>VIRE SEU CELULAR</h1>
-    <p>Este jogo funciona apenas<br>no modo paisagem (landscape)</p>
+    <p>Este jogo funciona apenas<br>no modo retrato (portrait)</p>
   </div>
+
 
   <div id="image-preview" class="image-preview">
     <div class="close-preview" onclick="hideImagePreview()">✕</div>
@@ -1134,10 +1135,13 @@
       const warning = document.getElementById('orientation-warning');
       const container = document.querySelector('.container');
       
-      if (window.innerHeight > window.innerWidth) {
+      // INVERTIDO: Agora mostra aviso quando está em LANDSCAPE
+      if (window.innerWidth > window.innerHeight) {
+        // Landscape - mostra aviso
         warning.classList.add('show');
         container.style.display = 'none';
       } else {
+        // Portrait - funciona normalmente
         warning.classList.remove('show');
         container.style.display = 'block';
       }
