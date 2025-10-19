@@ -6,7 +6,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen">
-  <title>Pokemon Yellow Mobile</title>
+  <title>PokemonRad</title>
   <style>
     * {
       margin: 0;
@@ -19,7 +19,7 @@
       font-family: 'Press Start 2P', monospace, Arial;
       background: #000;
       color: #fff;
-      font-size: 10px;
+      font-size: 20px;
       overflow: hidden;
       position: fixed;
       width: 100%;
@@ -98,20 +98,20 @@
 
     h1 {
       text-align: center;
-      font-size: 16px;
+      font-size: 32px;
       margin-bottom: 10px;
       color: #ffcc00;
       text-shadow: 2px 2px #000;
     }
 
     h2 {
-      font-size: 12px;
+      font-size: 24px;
       margin: 10px 0;
       color: #cc0000;
     }
 
     h3 {
-      font-size: 10px;
+      font-size: 20px;
     }
 
     .starter-selection {
@@ -145,7 +145,7 @@
 
     .starter-card p {
       margin-top: 5px;
-      font-size: 7px;
+      font-size: 14px;
       line-height: 1.4;
     }
 
@@ -172,7 +172,7 @@
       border: 3px solid #000;
       border-radius: 5px;
       padding: 8px;
-      font-size: 8px;
+      font-size: 16px;
       touch-action: manipulation;
     }
 
@@ -191,18 +191,18 @@
     }
 
     .pokemon-center-icon {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       position: absolute;
       right: 50px;
       top: 60px;
       image-rendering: pixelated;
-      transform: scale(2);
+      transform: scale(2.5);
       touch-action: manipulation;
     }
 
     .pokemon-center-icon:active {
-      transform: scale(2.1);
+      transform: scale(2.6);
     }
 
     .player-info {
@@ -212,7 +212,7 @@
       padding: 10px;
       margin-bottom: 10px;
       color: #fff;
-      font-size: 9px;
+      font-size: 18px;
       position: relative;
     }
 
@@ -223,12 +223,13 @@
       padding: 10px;
       margin-bottom: 10px;
       color: #fff;
-      font-size: 8px;
+      font-size: 16px;
       width: fit-content;
       max-width: 100%;
       min-width: 150px;
-      margin-left: auto;
-      transform: translateX(10px) translateY(15px);
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
     }
 
     .pokemon-display {
@@ -278,45 +279,56 @@
     }
 
     .potion-container button {
-      font-size: 9px;
+      font-size: 18px;
       min-width: 120px;
     }
 
     .battle-pokemon-container {
       background-image: url('pokemon_assets/images/battle_bg.jpg');
-      background-size: cover;
+      background-size: contain;
       background-position: center;
+      background-repeat: no-repeat;
       border: 3px solid #000;
       border-radius: 5px;
-      padding: 10px;
       margin-bottom: 10px;
       position: relative;
-      height: 180px;
+      width: 100%;
+      max-width: 850px; /* Ajuste esse valor para mudar o tamanho */
+      margin-left: auto;
+      margin-right: auto;
+      aspect-ratio: 400 / 238;
+      overflow: hidden;
     }
 
     .battle-area {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: space-between;
-      margin: 10px 0;
-      height: 100%;
+      align-items: center;
     }
 
     .pokemon-sprite {
       text-align: center;
-      position: relative;
+      position: absolute;
     }
 
     .pokemon-sprite:first-child {
-      transform: translate(30px, 80px);
+      left: 5%;
+      bottom: 15%;
     }
 
     .pokemon-sprite:last-child {
-      transform: translate(-30px, 10px);
+      right: 5%;
+      top: 20%;
     }
 
     .pokemon-sprite img {
-      width: 80px;
-      height: 80px;
+      width: 120px;
+      height: 120px;
       image-rendering: pixelated;
     }
 
@@ -326,12 +338,12 @@
       border-radius: 5px;
       padding: 10px;
       margin: 10px 0;
-      font-size: 9px;
+      font-size: 18px;
       color: #fff;
     }
 
     .question-box h3 {
-      font-size: 10px;
+      font-size: 20px;
       margin-bottom: 8px;
       color: #fff;
       line-height: 1.4;
@@ -350,7 +362,7 @@
       border-radius: 5px;
       padding: 10px 12px;
       font-family: inherit;
-      font-size: 9px;
+      font-size: 18px;
       color: #000;
       font-weight: bold;
       touch-action: manipulation;
@@ -374,7 +386,7 @@
       color: #fff;
       margin: 10px 0;
       min-height: 50px;
-      font-size: 9px;
+      font-size: 18px;
       line-height: 1.5;
     }
 
@@ -384,7 +396,7 @@
       border-radius: 5px;
       padding: 10px;
       margin: 10px 0;
-      font-size: 9px;
+      font-size: 18px;
     }
 
     .btn-primary {
@@ -409,7 +421,7 @@
       position: absolute;
       background: #cc0000;
       color: #fff;
-      font-size: 7px;
+      font-size: 14px;
       padding: 6px 8px;
       top: 5px;
       right: 5px;
@@ -423,7 +435,7 @@
     .btn-export {
       background: #00aa00;
       color: #fff;
-      font-size: 8px;
+      font-size: 16px;
       padding: 6px 8px;
       position: absolute;
       top: 5px;
@@ -438,7 +450,7 @@
     .btn-import {
       background: #0066cc;
       color: #fff;
-      font-size: 8px;
+      font-size: 16px;
       padding: 6px 8px;
       position: absolute;
       top: 5px;
@@ -480,11 +492,13 @@
       padding: 8px;
       color: #fff;
       margin-bottom: 8px;
-      font-size: 8px;
+      font-size: 16px;
       width: fit-content;
       max-width: 100%;
       min-width: 150px;
-      transform: translateX(-10px) translateY(-10px);
+      position: absolute;
+      left: 20px;
+      top: 20px;
     }
 
     .battle-stat-bar {
@@ -512,7 +526,7 @@
 
     .elite-section h2 {
       color: #ffd700;
-      font-size: 14px;
+      font-size: 28px;
       text-shadow: 2px 2px #000;
       margin-bottom: 8px;
     }
@@ -529,7 +543,7 @@
       border: 3px solid #000;
       border-radius: 5px;
       padding: 10px;
-      font-size: 8px;
+      font-size: 16px;
       touch-action: manipulation;
     }
 
@@ -554,7 +568,7 @@
     }
 
     .victory-screen h1 {
-      font-size: 20px;
+      font-size: 40px;
       color: #8b00ff;
       text-shadow: 3px 3px #000;
       margin-bottom: 15px;
@@ -567,7 +581,7 @@
     }
 
     .victory-screen p {
-      font-size: 10px;
+      font-size: 20px;
       margin: 10px 0;
       color: #000;
     }
@@ -600,7 +614,7 @@
     }
 
     .evolution-container h2 {
-      font-size: 14px;
+      font-size: 28px;
       color: #ffcc00;
       margin-bottom: 15px;
       animation: pulse 1s infinite;
@@ -655,7 +669,7 @@
 
     .evolution-buttons button {
       min-width: 100px;
-      font-size: 9px;
+      font-size: 18px;
     }
 
     .battle-result-overlay {
@@ -710,7 +724,7 @@
     }
 
     .battle-result-message h1 {
-      font-size: 20px;
+      font-size: 40px;
       margin-bottom: 10px;
       text-shadow: 3px 3px #000;
       animation: pulse 2s infinite;
@@ -726,7 +740,7 @@
     }
 
     .battle-result-message p {
-      font-size: 10px;
+      font-size: 20px;
       color: #fff;
       margin-top: 8px;
       line-height: 1.4;
@@ -737,7 +751,7 @@
       border: 2px solid #000;
       border-radius: 5px;
       padding: 5px 10px;
-      font-size: 8px;
+      font-size: 16px;
       color: #000;
       font-weight: bold;
       display: inline-block;
@@ -801,7 +815,7 @@
       text-decoration: underline;
       margin-bottom: 10px;
       display: inline-block;
-      font-size: 12px;
+      font-size: 24px;
       touch-action: manipulation;
     }
 
@@ -836,15 +850,15 @@
       <div class="evolution-sprites">
         <div class="evolution-sprite">
           <img id="evolution-from-sprite" src="" alt="Pokemon Atual">
-          <p id="evolution-from-name" style="margin-top: 8px; font-size: 9px;"></p>
+          <p id="evolution-from-name" style="margin-top: 8px; font-size: 18px;"></p>
         </div>
         <div class="evolution-arrow">➜</div>
         <div class="evolution-sprite">
           <img id="evolution-to-sprite" src="" alt="Pokemon Evoluído">
-          <p id="evolution-to-name" style="margin-top: 8px; font-size: 9px;"></p>
+          <p id="evolution-to-name" style="margin-top: 8px; font-size: 18px;"></p>
         </div>
       </div>
-      <p id="evolution-message" style="font-size: 9px; margin: 10px 0;"></p>
+      <p id="evolution-message" style="font-size: 18px; margin: 10px 0;"></p>
       <div class="evolution-buttons" id="evolution-choice" style="display: none;">
         <button onclick="confirmEvolution()" class="btn-primary">Sim, evoluir!</button>
         <button onclick="cancelEvolution()" class="btn-secondary">Não, cancelar</button>
@@ -867,7 +881,7 @@
 
   <div class="container">
     <div id="starter-screen" class="screen">
-      <h1>🎮 POKEMON YELLOW 🎮</h1>
+      <h1>🎮 POKEMONRAD 🎮</h1>
       <h2>Escolha seu Pokemon Inicial:</h2>
       <div class="starter-selection">
         <div class="starter-card" onclick="selectStarter('bulbasaur')">
@@ -971,7 +985,7 @@
 
       <div class="elite-section" id="elite-section" style="display: none;">
         <h2>👑 ELITE FOUR 👑</h2>
-        <p style="font-size: 9px; color: #fff; margin: 10px 0;">Você conquistou todas as 8 insígnias!<br>Agora enfrente a Elite Four!</p>
+        <p style="font-size: 18px; color: #fff; margin: 10px 0;">Você conquistou todas as 8 insígnias!<br>Agora enfrente a Elite Four!</p>
         <div class="elite-grid">
           <div class="elite-card locked" id="elite-0" onclick="challengeElite(0)">
             <h3>❄️ LORELEI</h3>
@@ -1001,34 +1015,34 @@
       <h1>💪 TREINO POKEMON 💪</h1>
       
       <div class="battle-pokemon-container">
-        <div class="opponent-info">
-          <p><strong id="training-opponent-name">Pokemon Selvagem</strong></p>
-          <p><span id="training-opponent-pokemon-name">Pokemon</span> - Nível <span id="training-opponent-level">5</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill" id="training-opponent-hp-bar" style="width: 100%"></div>
-          </div>
-          <p>HP: <span id="training-opponent-hp-display">30/30</span></p>
-        </div>
-
         <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="training-opponent-name">Pokemon Selvagem</strong></p>
+            <p><span id="training-opponent-pokemon-name">Pokemon</span> - Nível <span id="training-opponent-level">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="training-opponent-hp-bar" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="training-opponent-hp-display">30/30</span></p>
+          </div>
+
           <div class="pokemon-sprite">
             <img id="training-player-sprite" src="" alt="Seu Pokemon">
           </div>
           <div class="pokemon-sprite">
             <img id="training-opponent-sprite" src="" alt="Pokemon Selvagem">
           </div>
-        </div>
 
-        <div class="battle-player-info">
-          <p><span id="training-pokemon-name">---</span> Lv.<span id="training-level">1</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill" id="training-battle-hp-bar" style="width: 100%"></div>
+          <div class="battle-player-info">
+            <p><span id="training-pokemon-name">---</span> Lv.<span id="training-level">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="training-battle-hp-bar" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="training-battle-hp-display">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="training-exp-bar" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="training-exp-display">0/50</span></p>
           </div>
-          <p>HP: <span id="training-battle-hp-display">15/15</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill exp-fill" id="training-exp-bar" style="width: 0%"></div>
-          </div>
-          <p>EXP: <span id="training-exp-display">0/50</span></p>
         </div>
       </div>
 
@@ -1057,34 +1071,34 @@
       <h1>⚔️ BATALHA POKEMON ⚔️</h1>
       
       <div class="battle-pokemon-container">
-        <div class="opponent-info">
-          <p><strong id="opponent-name">Pokemon</strong></p>
-          <p><span id="opponent-pokemon-name">Pokemon</span> - Nível <span id="opponent-level">5</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill" id="opponent-hp-bar" style="width: 100%"></div>
-          </div>
-          <p>HP: <span id="opponent-hp-display">30/30</span></p>
-        </div>
-
         <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name">Pokemon</span> - Nível <span id="opponent-level">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display">30/30</span></p>
+          </div>
+
           <div class="pokemon-sprite">
             <img id="battle-player-sprite" src="" alt="Seu Pokemon">
           </div>
           <div class="pokemon-sprite">
             <img id="battle-opponent-sprite" src="" alt="Pokemon">
           </div>
-        </div>
 
-        <div class="battle-player-info">
-          <p><span id="battle-player-name">---</span> Lv.<span id="battle-player-level">1</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill" id="battle-hp-bar" style="width: 100%"></div>
+          <div class="battle-player-info">
+            <p><span id="battle-player-name">---</span> Lv.<span id="battle-player-level">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display">0/50</span></p>
           </div>
-          <p>HP: <span id="battle-hp-display">15/15</span></p>
-          <div class="battle-stat-bar">
-            <div class="stat-fill exp-fill" id="battle-exp-bar" style="width: 0%"></div>
-          </div>
-          <p>EXP: <span id="battle-exp-display">0/50</span></p>
         </div>
       </div>
 
@@ -1107,37 +1121,32 @@
 
     <div id="victory-screen" class="screen victory-screen">
       <h1>🎉 PARABÉNS! 🎉</h1>
-      <p style="font-size: 12px; margin: 15px 0;">VOCÊ SE TORNOU O</p>
-      <h1 style="font-size: 22px;">MESTRE POKEMON!</h1>
-      <p style="font-size: 10px; margin: 15px 0;">Você derrotou todos os líderes de ginásio<br>e a Elite Four!</p>
-      <p style="font-size: 12px; margin: 20px 0;">🏆 JOGO COMPLETO 🏆</p>
-      <button onclick="resetGame()" style="font-size: 10px; margin-top: 15px;">Jogar Novamente</button>
+      <p style="font-size: 24px; margin: 15px 0;">VOCÊ SE TORNOU O</p>
+      <h1 style="font-size: 44px;">MESTRE POKEMON!</h1>
+      <p style="font-size: 20px; margin: 15px 0;">Você derrotou todos os líderes de ginásio<br>e a Elite Four!</p>
+      <p style="font-size: 24px; margin: 20px 0;">🏆 JOGO COMPLETO 🏆</p>
+      <button onclick="resetGame()" style="font-size: 20px; margin-top: 15px;">Jogar Novamente</button>
     </div>
   </div>
 
   <script>
-    // Controle de Orientação
     function checkOrientation() {
       const warning = document.getElementById('orientation-warning');
       const container = document.querySelector('.container');
       
       if (window.innerHeight > window.innerWidth) {
-        // Portrait - mostra aviso
         warning.classList.add('show');
         container.style.display = 'none';
       } else {
-        // Landscape - esconde aviso
         warning.classList.remove('show');
         container.style.display = 'block';
       }
     }
 
-    // Verifica orientação ao carregar e ao mudar
     window.addEventListener('load', checkOrientation);
     window.addEventListener('resize', checkOrientation);
     window.addEventListener('orientationchange', checkOrientation);
 
-    // Código do jogo (mesmo do original, sem alterações na lógica)
     const game = {
       player: {
         pokemon: null,
@@ -1265,7 +1274,7 @@ GABARITO: C
         });
         
         if (hasImage) {
-          questionText = `<span class="image-link" onclick="showImagePreviewAuto('questao_imagens/questao_${questionNumber}')" style="color: #ffcc00; text-decoration: underline; cursor: pointer; margin-bottom: 10px; display: inline-block; font-size: 12px;">🖼️VER IMAGEM</span><br>` + questionText;
+          questionText = `<span class="image-link" onclick="showImagePreviewAuto('questao_imagens/questao_${questionNumber}')" style="color: #ffcc00; text-decoration: underline; cursor: pointer; margin-bottom: 10px; display: inline-block; font-size: 24px;">🖼️VER IMAGEM</span><br>` + questionText;
         }
         
         if (questionText && options.length === 5 && correctAnswer) {
