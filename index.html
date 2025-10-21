@@ -187,45 +187,43 @@
 
     .battle-player-info {
       background: rgba(0, 0, 0, 0.85);
-      border: 3px solid #ffcc00;     /* ← PIXELS FIXOS */
-      border-radius: 1%;
-      padding: 8px;                  /* ← PIXELS FIXOS */
-      margin-bottom: 1%;
+      border: 0.3cqw solid #ffcc00;
+      border-radius: 1.3cqw;
+      padding: 1cqw;
+      margin-bottom: 1.4cqw;
       color: #fff;
-      font-size: 16px;               /* ← BASE EM PIXELS */
-      font-size: clamp(12px, 1.6vw, 18px);  /* Entre 12-18px */
-      width: fit-content;
-      max-width: min(45%, 300px);    /* ← Menor entre 45% ou 400px */
-      min-width: max(30%, 180px);    /* ← Maior entre 30% ou 180px */
+      container-type: inline-size;
+      font-size: 1.4cqw;
       position: absolute;
+      width: 37%;
+      height: 20%;
       right: 2%;
       bottom: 2%;
     }
 
     .opponent-info {
       background: rgba(255, 0, 0, 0.85);
-      border: 3px solid #000;        /* ← PIXELS FIXOS */
-      border-radius: 1%;
-      padding: 8px;                  /* ← PIXELS FIXOS */
+      border: 0.3cqw solid #000;
+      border-radius: 1.3cqw;
+      padding: 1cqw;
       color: #fff;
-      margin-bottom: 1%;
-      font-size: 16px;               /* ← BASE EM PIXELS */
-      font-size: clamp(12px, 1.6vw, 18px);  /* Entre 12-18px */
-      width: fit-content;
-      max-width: min(45%, 300px);    /* ← Menor entre 45% ou 400px */
-      min-width: max(30%, 180px);    /* ← Maior entre 30% ou 180px */
+      margin-bottom: 1.4cqw;
+      container-type: inline-size;
+      font-size: 1.4cqw;
       position: absolute;
+      width: 45%;
+      height: 20%;
       left: 2%;
       top: 2%;
     }
 
     .battle-stat-bar {
       background: #333;
-      height: 12px;                  /* ← PIXELS FIXOS */
-      border-radius: 6px;            /* ← PIXELS FIXOS */
+      height: 2.2cqh;
+      border-radius: 0.5cqw;
       overflow: hidden;
-      margin: 4px 0;                 /* ← PIXELS FIXOS */
-      border: 2px solid #000;        /* ← PIXELS FIXOS */
+      margin: 0.4cqh 0;
+      border: 0.2cqw solid #000;
       max-width: 70%;
     }
 
