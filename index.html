@@ -240,11 +240,24 @@
       order: 2;
     }
 
-    .pokemon-display img {
+    .pokemon-display img.starter-small {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .pokemon-display img.mid-small {
+      width: 110px;
+      height: 110px;
+      flex-shrink: 0;
+    }
+
+    .pokemon-display img.final-small {
       width: 150px;
       height: 150px;
-      flex-shrink: 0; /* ADICIONE - evita que a imagem encolha */
+      flex-shrink: 0;
     }
+
 
     .stats {
       flex: 1;
@@ -27522,8 +27535,27 @@ GABARITO: A
 
     function updatePlayerDisplay() {
       const data = pokemonData[game.player.pokemon];
-      document.getElementById('player-sprite').src = data.frontSprite;
-      applyPokemonScale(document.getElementById('player-sprite'), game.player.pokemon, 1.0);
+      const spriteImg = document.getElementById('player-sprite');
+      spriteImg.src = data.frontSprite;
+      
+      // Remove todas as classes de tamanho primeiro
+      spriteImg.classList.remove('starter-small', 'mid-small', 'final-small');
+      
+      // Define os grupos de tamanho
+      const starterSmall = ['bulbasaur', 'charmander', 'squirtle'];
+      const midSmall = ['ivysaur', 'charmeleon', 'wartortle'];
+      const finalSmall = ['venusaur', 'charizard', 'blastoise'];
+      
+      // Adiciona a classe apropriada
+      if (starterSmall.includes(game.player.pokemon)) {
+        spriteImg.classList.add('starter-small');
+      } else if (midSmall.includes(game.player.pokemon)) {
+        spriteImg.classList.add('mid-small');
+      } else if (finalSmall.includes(game.player.pokemon)) {
+        spriteImg.classList.add('final-small');
+      }
+      
+      applyPokemonScale(spriteImg, game.player.pokemon, 1.0);
       document.getElementById('player-pokemon-name').textContent = data.name;
       document.getElementById('player-level').textContent = game.player.level;
       document.getElementById('hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
