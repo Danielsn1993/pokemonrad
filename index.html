@@ -187,15 +187,16 @@
 
     .battle-player-info {
       background: rgba(0, 0, 0, 0.85);
-      border: 0.675vw solid #ffcc00; /* 0.45 * 1.5 = 0.675 */
+      border: 3px solid #ffcc00;     /* ← PIXELS FIXOS */
       border-radius: 1%;
-      padding: 3.375%; /* 2.25 * 1.5 = 3.375 */
+      padding: 8px;                  /* ← PIXELS FIXOS */
       margin-bottom: 1%;
       color: #fff;
-      font-size: 2.7vw; /* 1.8 * 1.5 = 2.7 */
+      font-size: 16px;               /* ← BASE EM PIXELS */
+      font-size: clamp(12px, 1.6vw, 18px);  /* Entre 12-18px */
       width: fit-content;
-      max-width: 45%;
-      min-width: 30%;
+      max-width: min(45%, 400px);    /* ← Menor entre 45% ou 400px */
+      min-width: max(30%, 180px);    /* ← Maior entre 30% ou 180px */
       position: absolute;
       right: 2%;
       bottom: 2%;
@@ -203,15 +204,16 @@
 
     .opponent-info {
       background: rgba(255, 0, 0, 0.85);
-      border: 0.675vw solid #000; /* 0.45 * 1.5 = 0.675 */
+      border: 3px solid #000;        /* ← PIXELS FIXOS */
       border-radius: 1%;
-      padding: 3.375%; /* 2.25 * 1.5 = 3.375 */
+      padding: 8px;                  /* ← PIXELS FIXOS */
       color: #fff;
       margin-bottom: 1%;
-      font-size: 2.7vw; /* 1.8 * 1.5 = 2.7 */
+      font-size: 16px;               /* ← BASE EM PIXELS */
+      font-size: clamp(12px, 1.6vw, 18px);  /* Entre 12-18px */
       width: fit-content;
-      max-width: 45%;
-      min-width: 30%;
+      max-width: min(45%, 400px);    /* ← Menor entre 45% ou 400px */
+      min-width: max(30%, 180px);    /* ← Maior entre 30% ou 180px */
       position: absolute;
       left: 2%;
       top: 2%;
@@ -219,11 +221,11 @@
 
     .battle-stat-bar {
       background: #333;
-      height: 2.25vw; /* 1.5 * 1.5 = 2.25 */
-      border-radius: 1.125vw; /* 0.75 * 1.5 = 1.125 */
+      height: 12px;                  /* ← PIXELS FIXOS */
+      border-radius: 6px;            /* ← PIXELS FIXOS */
       overflow: hidden;
-      margin: 0.675vw 0; /* 0.45 * 1.5 = 0.675 */
-      border: 0.45vw solid #000; /* 0.3 * 1.5 = 0.45 */
+      margin: 4px 0;                 /* ← PIXELS FIXOS */
+      border: 2px solid #000;        /* ← PIXELS FIXOS */
       max-width: 70%;
     }
 
@@ -313,17 +315,6 @@
       margin-right: auto;
       aspect-ratio: 896 / 1152;
       overflow: hidden;
-    }
-
-    .battle-area {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .pokemon-sprite {
@@ -1015,7 +1006,6 @@
       <h1>💪 TREINO POKEMON 💪</h1>
       
       <div class="battle-pokemon-container">
-        <div class="battle-area">
           <div class="opponent-info">
             <p><strong id="training-opponent-name">Pokemon Selvagem</strong></p>
             <p><span id="training-opponent-pokemon-name">Pokemon</span> - Nível <span id="training-opponent-level">5</span></p>
@@ -1043,7 +1033,6 @@
             </div>
             <p>EXP: <span id="training-exp-display">0/50</span></p>
           </div>
-        </div>
       </div>
 
       <div class="message-box" id="training-message">
