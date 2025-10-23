@@ -818,6 +818,136 @@
         overflow: hidden;
       }
     }
+
+    /* Mini-game Modal */
+    .minigame-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 90%;
+      max-width: 540px;
+      max-height: 90vh;
+      background: linear-gradient(135deg, #87CEEB, #98D8E8);
+      border: 5px solid #000;
+      border-radius: 15px;
+      padding: 20px;
+      z-index: 10000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .minigame-modal.active {
+      display: flex;
+    }
+
+    .minigame-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      display: none;
+    }
+
+    .minigame-overlay.active {
+      display: block;
+    }
+
+    .minigame-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .minigame-header h2 {
+      color: #fff;
+      text-shadow: 2px 2px #000;
+      font-size: 20px;
+    }
+
+    .minigame-timer {
+      font-size: 24px;
+      color: #ff0000;
+      margin: 5px 0;
+    }
+
+    .minigame-score {
+      font-size: 18px;
+      color: #000;
+    }
+
+    .minigame-area {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      background: rgba(255, 255, 255, 0.2);
+      border: 3px solid #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .basket {
+      position: absolute;
+      bottom: 20px;
+      width: 80px;
+      height: 60px;
+      background: #8B4513;
+      border: 3px solid #000;
+      border-radius: 10px 10px 40px 40px;
+      transition: left 0.1s;
+    }
+
+    .pokeball-falling {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, #ff0000, #cc0000);
+      border: 2px solid #000;
+      border-radius: 50%;
+      animation: fall linear;
+    }
+
+    .pokeball-falling::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #000;
+      transform: translateY(-50%);
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(calc(100vh - 100px));
+      }
+    }
+
+    .minigame-result {
+      text-align: center;
+      padding: 20px;
+      display: none;
+    }
+
+    .minigame-result.show {
+      display: block;
+    }
+
+    .minigame-btn {
+      padding: 15px 30px;
+      font-size: 16px;
+      background: #ffcc00;
+      border: 3px solid #000;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -932,7 +1062,7 @@
 
       <div class="training-area">
         <h2>💪 Área de Treino</h2>
-        <p style="margin: 8px 0;">Resolva questões para ganhar EXP e subir de nível! Cuidado: erros fazem você perder vida (HP) em batalhas e perder EXP.</p>
+        <p style="margin: 8px 0;">Resolva questões para causar dano ao pokemon inimigo, ganhar EXP e subir de nível! Cuidado: erros fazem você perder vida (HP) em batalhas.</p>
         <button onclick="startTraining()" class="btn-secondary">Treinar Agora</button>
       </div>
 
@@ -1116,6 +1246,26 @@
     </div>
   </div>
 
+  <!-- Mini-game Modal -->
+  <div class="minigame-overlay" id="minigame-overlay"></div>
+  <div class="minigame-modal" id="minigame-modal">
+    <div class="minigame-header">
+      <h2>Captura de Comprimidos!</h2>
+      <div class="minigame-timer">Tempo: <span id="minigame-time">10</span>s</div>
+      <div class="minigame-score">Comprimidos: <span id="minigame-caught">0</span>/30</div>
+    </div>
+    
+    <div class="minigame-area" id="minigame-area">
+      <div class="basket" id="basket"></div>
+    </div>
+    
+    <div class="minigame-result" id="minigame-result">
+      <h3 id="result-title"></h3>
+      <p id="result-message"></p>
+      <button class="minigame-btn" onclick="closeMinigame()">Continuar</button>
+    </div>
+  </div>
+
   <script>
     const game = {
       player: {
@@ -1138,6 +1288,15 @@
       questionsAnswered: 0,
       pendingEvolution: null
     };
+
+    // Variáveis do mini-game
+    let minigameActive = false;
+    let minigameTimer = null;
+    let minigamePokeballInterval = null;
+    let minigameTimeLeft = 10;
+    let minigameCaught = 0;
+    let minigameTotalBalls = 30;
+    let minigameBasketPosition = 50;
 
     const audioSystem = {
       currentAudio: null,
@@ -10592,7 +10751,7 @@ E) Deixa o laudo descritivo e sugere complementação com ressonância magnétic
 GABARITO: B
 QUESTÃO 939
 
-Paciente de 79 anos, masculino, tabagista, apresenta nódulos parotídeos predominantemente caudal aos métodos de imagem (ultrassonografia, tomografia computadorizada ressonância magnética). Qual a principal hipótese diagnóstica?
+Paciente de 79 anos, masculino, tabagista, apresenta nódulos parotídeos predominantemente caudal aos métodos de imagem (ultrassonografia, tomografia computadorizada e ressonância magnética). Qual a principal hipótese diagnóstica?
 
 A) Adenoma pleomórfico múltiplo.
 B) Oncocitoma.
@@ -16114,13 +16273,13 @@ E) Monitoramento de massa óssea.
 GABARITO: B
 QUESTÃO 1491
 
-Em relação à ultrassonografia transretal (USTR) e cancer de prostáta , e possivelmente que:
+Em relação à ultrassonografia transretal (USTR) e câncer de prostáta, é possivelmente que:
 
-A) A USTR é o melhor modalidade de imagem para diagnóstico da doença neoplásica da próstata, uma vez que os cânceres de próstata são visíveis na USTR.
+A) A USTR é a melhor modalidade de imagem para diagnóstico da doença neoplásica da próstata, uma vez que os cânceres de próstata são visíveis na USTR.
 B) A USTR não é o método indicado para a identificação de áreas suspeitas na próstata para guiar a biópsia.
-C) Somente os nódulos hipoecoicos identificados na USTR são positivos para câncer.
-D) A USTR, até o momento possui três papéis relacionados ao câncer da próstata: orientar a biópsia, aferir volume e orientar a terapia (ex., braquiterapia).
-E) Os nódulos hiperecoicos na zona periférica identificados pela USTR não precisam ser biopsiados porque são benignos.
+C) Somente os nódulos hipoecóicos identificados na USTR são positivos para câncer.
+D) A USTR, até o momento, possui três papéis relacionados ao câncer da próstata: orientar a biópsia, aferir volume e orientar a terapia (exemplo: braquiterapia).
+E) Os nódulos hiperecóicos na zona periférica identificados pela USTR não precisam ser biopsiados porque são benignos.
 GABARITO: D
 QUESTÃO 1492
 
@@ -22809,11 +22968,10 @@ E) O fluxo portal é hepatopetal, e a velocidade está aumentada.
 GABARITO: D
 QUESTÃO 2159
 
-Considere uma gestante de 20 semanas, primigesta, sem comorbidades de 37 anos de idade. Assinale a alternativa corretamente relacionada com o controle ultrassonográfico.
+Considere uma gestante de 20 semanas, primigesta, sem comorbidades, de 37 anos de idade. Assinale a alternativa corretamente relacionada com o controle ultrassonográfico.
 
 A) A avaliação da vitalidade fetal pode ser feita pelo perfil biofísico fetal.
-B) O estudo Dopplervelocimétrico das artérias uterinas permitirá indicar a terapêutica com
-aspirina para prevenção de pré-eclâmpsia.
+B) O estudo Dopplervelocimétrico das artérias uterinas permitirá indicar a terapêutica com aspirina para prevenção de pré-eclâmpsia.
 C) O principal parâmetro para cálculo da idade gestacional é o comprimento dos ossos longos.
 D) É a época ideal para o cálculo da idade gestacional através da avaliação morfológica fetal.
 E) A maioria das malformações grosseiras do SNC é diagnosticada nesse período.
@@ -27477,10 +27635,224 @@ GABARITO: A
     }
 
     function healPokemon() {
-      game.player.hp = game.player.maxHp;
-      saveGame();
-      updatePlayerDisplay();
-      alert('Seu Pokemon foi curado completamente!');
+      // Inicia o mini-game ao invés de curar diretamente
+      startMinigame();
+    }
+
+    function startMinigame() {
+      // Reset variáveis
+      minigameActive = true;
+      minigameTimeLeft = 10;
+      minigameCaught = 0;
+      minigameBasketPosition = 50;
+      
+      // Mostra o modal
+      document.getElementById('minigame-overlay').classList.add('active');
+      document.getElementById('minigame-modal').classList.add('active');
+      document.getElementById('minigame-result').classList.remove('show');
+      document.getElementById('minigame-area').style.display = 'block';
+      
+      // Atualiza displays
+      document.getElementById('minigame-time').textContent = minigameTimeLeft;
+      document.getElementById('minigame-caught').textContent = '0';
+      
+      // Posiciona a cesta no centro
+      const basket = document.getElementById('basket');
+      const gameArea = document.getElementById('minigame-area');
+      basket.style.left = '50%';
+      basket.style.transform = 'translateX(-50%)';
+      
+      // Adiciona controles
+      setupMinigameControls();
+      
+      // Inicia o timer
+      minigameTimer = setInterval(() => {
+        minigameTimeLeft--;
+        document.getElementById('minigame-time').textContent = minigameTimeLeft;
+        
+        if (minigameTimeLeft <= 0) {
+          endMinigame();
+        }
+      }, 1000);
+      
+      // Inicia a criação de pokébolas (3 por segundo = 333ms)
+      let ballsCreated = 0;
+      minigamePokeballInterval = setInterval(() => {
+        if (ballsCreated < minigameTotalBalls && minigameActive) {
+          createPokeball();
+          ballsCreated++;
+        }
+        if (ballsCreated >= minigameTotalBalls) {
+          clearInterval(minigamePokeballInterval);
+        }
+      }, 333); // 30 bolas em 10 segundos = 3 por segundo
+    }
+
+    function setupMinigameControls() {
+      const gameArea = document.getElementById('minigame-area');
+      const basket = document.getElementById('basket');
+      
+      // Controle por teclado
+      document.addEventListener('keydown', handleKeyPress);
+      
+      // Controle por mouse
+      gameArea.addEventListener('mousemove', handleMouseMove);
+      
+      // Controle por toque (mobile)
+      gameArea.addEventListener('touchmove', handleTouchMove);
+      gameArea.addEventListener('touchstart', handleTouchMove);
+    }
+
+    function handleKeyPress(e) {
+      if (!minigameActive) return;
+      
+      const basket = document.getElementById('basket');
+      const gameArea = document.getElementById('minigame-area');
+      const basketWidth = basket.offsetWidth;
+      const areaWidth = gameArea.offsetWidth;
+      let currentLeft = parseInt(basket.style.left) || (areaWidth / 2);
+      
+      if (e.key === 'ArrowLeft') {
+        currentLeft = Math.max(0, currentLeft - 20);
+      } else if (e.key === 'ArrowRight') {
+        currentLeft = Math.min(areaWidth - basketWidth, currentLeft + 20);
+      }
+      
+      basket.style.left = currentLeft + 'px';
+      basket.style.transform = 'translateX(0)';
+    }
+
+    function handleMouseMove(e) {
+      if (!minigameActive) return;
+      
+      const gameArea = document.getElementById('minigame-area');
+      const basket = document.getElementById('basket');
+      const rect = gameArea.getBoundingClientRect();
+      const basketWidth = basket.offsetWidth;
+      
+      let x = e.clientX - rect.left - (basketWidth / 2);
+      x = Math.max(0, Math.min(rect.width - basketWidth, x));
+      
+      basket.style.left = x + 'px';
+      basket.style.transform = 'translateX(0)';
+    }
+
+    function handleTouchMove(e) {
+      if (!minigameActive) return;
+      e.preventDefault();
+      
+      const touch = e.touches[0];
+      const gameArea = document.getElementById('minigame-area');
+      const basket = document.getElementById('basket');
+      const rect = gameArea.getBoundingClientRect();
+      const basketWidth = basket.offsetWidth;
+      
+      let x = touch.clientX - rect.left - (basketWidth / 2);
+      x = Math.max(0, Math.min(rect.width - basketWidth, x));
+      
+      basket.style.left = x + 'px';
+      basket.style.transform = 'translateX(0)';
+    }
+
+    function createPokeball() {
+      const gameArea = document.getElementById('minigame-area');
+      const pokeball = document.createElement('div');
+      pokeball.className = 'pokeball-falling';
+      
+      // Posição aleatória horizontal
+      const areaWidth = gameArea.offsetWidth;
+      const randomX = Math.random() * (areaWidth - 40);
+      pokeball.style.left = randomX + 'px';
+      pokeball.style.top = '0px';
+      
+      // Velocidade de queda (2 segundos para cair)
+      pokeball.style.animationDuration = '2s';
+      
+      gameArea.appendChild(pokeball);
+      
+      // Verifica colisão continuamente
+      const checkCollision = setInterval(() => {
+        if (!minigameActive) {
+          clearInterval(checkCollision);
+          return;
+        }
+        
+        const basket = document.getElementById('basket');
+        const basketRect = basket.getBoundingClientRect();
+        const ballRect = pokeball.getBoundingClientRect();
+        
+        // Verifica se a pokébola está na altura da cesta
+        if (ballRect.bottom >= basketRect.top && ballRect.top <= basketRect.bottom) {
+          // Verifica se está dentro da área horizontal da cesta
+          if (ballRect.left < basketRect.right && ballRect.right > basketRect.left) {
+            // Capturou!
+            minigameCaught++;
+            document.getElementById('minigame-caught').textContent = minigameCaught;
+            pokeball.remove();
+            clearInterval(checkCollision);
+            
+            // Efeito visual de captura
+            basket.style.background = '#FFD700';
+            setTimeout(() => {
+              basket.style.background = '#8B4513';
+            }, 100);
+          }
+        }
+        
+        // Remove a pokébola se saiu da tela
+        if (ballRect.top > gameArea.getBoundingClientRect().bottom) {
+          pokeball.remove();
+          clearInterval(checkCollision);
+        }
+      }, 50);
+    }
+
+    function endMinigame() {
+      minigameActive = false;
+      
+      // Limpa timers
+      clearInterval(minigameTimer);
+      clearInterval(minigamePokeballInterval);
+      
+      // Remove controles
+      document.removeEventListener('keydown', handleKeyPress);
+      
+      // Remove pokébolas restantes
+      const pokeballs = document.querySelectorAll('.pokeball-falling');
+      pokeballs.forEach(ball => ball.remove());
+      
+      // Esconde área do jogo
+      document.getElementById('minigame-area').style.display = 'none';
+      
+      // Mostra resultado
+      const resultDiv = document.getElementById('minigame-result');
+      const resultTitle = document.getElementById('result-title');
+      const resultMessage = document.getElementById('result-message');
+      
+      resultDiv.classList.add('show');
+      
+      if (minigameCaught >= 25) {
+        // Sucesso! Cura o Pokémon
+        resultTitle.textContent = '🎉 SUCESSO! 🎉';
+        resultMessage.textContent = `Você capturou ${minigameCaught}/30 comprimidos!\nSeu ${pokemonData[game.player.pokemon].name} foi completamente curado!`;
+        resultTitle.style.color = '#00ff00';
+        
+        // Cura o Pokémon
+        game.player.hp = game.player.maxHp;
+        updatePlayerDisplay();
+        saveGame();
+      } else {
+        // Falhou
+        resultTitle.textContent = '😢 FALHOU! 😢';
+        resultMessage.textContent = `Você capturou apenas ${minigameCaught}/30 comprimidos.\nPrecisa capturar pelo menos 25 para curar seu Pokémon.\nTente novamente!`;
+        resultTitle.style.color = '#ff0000';
+      }
+    }
+
+    function closeMinigame() {
+      document.getElementById('minigame-overlay').classList.remove('active');
+      document.getElementById('minigame-modal').classList.remove('active');
+      document.getElementById('minigame-result').classList.remove('show');
     }
 
     function usePotion(battleType) {
@@ -27550,6 +27922,15 @@ GABARITO: A
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
       document.getElementById('hp-bar').style.width = hpPercent + '%';
+
+      // Atualiza cor da barra baseado na porcentagem
+      if (hpPercent > 50) {
+        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #00ff00, #00cc00)';
+      } else if (hpPercent > 20) {
+        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #ffff00, #ff9900)';
+      } else {
+        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #ff0000, #cc0000)';
+      }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
       document.getElementById('exp-bar').style.width = expPercent + '%';
@@ -27785,7 +28166,7 @@ GABARITO: A
             setTimeout(() => {
               messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
               messageEl.innerHTML = 'Treinamento concluído! Voltando ao mapa...';
-              if (Math.random() < 0.25) {
+              if (Math.random() < 0.07) {
                 game.player.potions++;
                 messageEl.innerHTML += '<br>🎁 Você ganhou uma Poção!';
                 saveGame();
