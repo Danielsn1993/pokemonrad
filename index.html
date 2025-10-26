@@ -905,21 +905,14 @@
       position: absolute;
       width: 40px;
       height: 40px;
-      background: radial-gradient(circle at 30% 30%, #ff0000, #cc0000);
-      border: 2px solid #000;
+      background: transparent; /* Removido o fundo vermelho */
+      border: none; /* Removida a borda */
       border-radius: 50%;
       animation: fall linear;
-    }
-
-    .pokeball-falling::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: #000;
-      transform: translateY(-50%);
+      font-size: 30px; /* Tamanho do emoji */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     @keyframes fall {
@@ -1251,8 +1244,10 @@
   <div class="minigame-modal" id="minigame-modal">
     <div class="minigame-header">
       <h2>Captura de Comprimidos!</h2>
-      <div class="minigame-timer">Tempo: <span id="minigame-time">10</span>s</div>
-      <div class="minigame-score">Comprimidos: <span id="minigame-caught">0</span>/30</div>
+      <div class="minigame-timer">
+        ITENS: <span id="minigame-time">50</span>
+      </div>
+      <div class="minigame-score">Comprimidos: <span id="minigame-caught">0</span>/50</div>
     </div>
     
     <div class="minigame-area" id="minigame-area">
@@ -1295,7 +1290,7 @@
     let minigamePokeballInterval = null;
     let minigameTimeLeft = 10;
     let minigameCaught = 0;
-    let minigameTotalBalls = 30;
+    let minigameTotalBalls = 50;
     let minigameBasketPosition = 50;
 
     const audioSystem = {
@@ -12734,10 +12729,10 @@ QUESTÃO 1137
 Qual dos achados a seguir está presente na estenose de artéria renal hemodinamicamente significativa?
 
 A) Artéria renal com velocidade sistólica máxima de 120 cm/s.
-B) Índice de aceleração nas artérias segmentares 350 cm/s2.
-C) Presença de padrão tardus parvus na porçãopré-estenose da artéria renal.
-D) Relação de velocidades sistólicas renal / segmentar 5.
-E) Relação de velocidades sistólicas renal /aorta 3,5.
+B) Índice de aceleração nas artérias segmentares de 350 cm/s2.
+C) Presença de padrão tardus parvus na porção pré-estenose da artéria renal.
+D) Relação de velocidades sistólicas renal/segmentar de 5.
+E) Relação de velocidades sistólicas renal/aorta de 3,5.
 GABARITO: E
 QUESTÃO 1138
 
@@ -27653,7 +27648,7 @@ GABARITO: A
       document.getElementById('minigame-area').style.display = 'block';
       
       // Atualiza displays
-      document.getElementById('minigame-time').textContent = minigameTimeLeft;
+      document.getElementById('minigame-time').textContent = minigameTotalBalls;
       document.getElementById('minigame-caught').textContent = '0';
       
       // Posiciona a cesta no centro
@@ -27665,17 +27660,7 @@ GABARITO: A
       // Adiciona controles
       setupMinigameControls();
       
-      // Inicia o timer
-      minigameTimer = setInterval(() => {
-        minigameTimeLeft--;
-        document.getElementById('minigame-time').textContent = minigameTimeLeft;
-        
-        if (minigameTimeLeft <= 0) {
-          endMinigame();
-        }
-      }, 1000);
-      
-      // Inicia a criação de pokébolas (3 por segundo = 333ms)
+      // Inicia a criação de itens (6 por segundo = 166ms - mais rápido!)
       let ballsCreated = 0;
       minigamePokeballInterval = setInterval(() => {
         if (ballsCreated < minigameTotalBalls && minigameActive) {
@@ -27684,8 +27669,14 @@ GABARITO: A
         }
         if (ballsCreated >= minigameTotalBalls) {
           clearInterval(minigamePokeballInterval);
+          // Aguarda 3 segundos após o último item para terminar
+          setTimeout(() => {
+            if (minigameActive) {
+              endMinigame();
+            }
+          }, 3000);
         }
-      }, 333); // 30 bolas em 10 segundos = 3 por segundo
+      }, 166); // 6 itens por segundo (mais rápido)
     }
 
     function setupMinigameControls() {
@@ -27755,10 +27746,38 @@ GABARITO: A
     }
 
     function createPokeball() {
+      // Definir itens bons e ruins
+      const goodItem = '💊'; // Comprimido (item bom)
+      const badItems = ['💣', '💩', '💀', '☠️']; // Comidas ruins
+
+      // Decidir aleatoriamente se será item bom ou ruim (30% de chance de ruim)
+      const badItemChance = 0.2 + (minigameCaught * 0.005);
+      const isBadItem = Math.random() < badItemChance;
+
+      // Escolher qual emoji usar
+      let itemEmoji;
+      if (isBadItem) {
+        // Escolhe aleatoriamente um item ruim do array
+        const randomIndex = Math.floor(Math.random() * badItems.length);
+        itemEmoji = badItems[randomIndex];
+      } else {
+        itemEmoji = goodItem;
+      }
       const gameArea = document.getElementById('minigame-area');
       const pokeball = document.createElement('div');
       pokeball.className = 'pokeball-falling';
-      
+
+      // Adicionar o emoji e identificar se é ruim
+      pokeball.textContent = itemEmoji;
+      pokeball.setAttribute('data-is-bad', isBadItem);
+      // Estilo para o emoji aparecer
+      pokeball.style.fontSize = '30px';
+      pokeball.style.display = 'flex';
+      pokeball.style.alignItems = 'center';
+      pokeball.style.justifyContent = 'center';
+      pokeball.style.background = 'transparent';
+      pokeball.style.border = 'none';
+            
       // Posição aleatória horizontal
       const areaWidth = gameArea.offsetWidth;
       const randomX = Math.random() * (areaWidth - 40);
@@ -27766,7 +27785,7 @@ GABARITO: A
       pokeball.style.top = '0px';
       
       // Velocidade de queda (2 segundos para cair)
-      pokeball.style.animationDuration = '2s';
+      pokeball.style.animationDuration = '1.6s';
       
       gameArea.appendChild(pokeball);
       
@@ -27785,17 +27804,32 @@ GABARITO: A
         if (ballRect.bottom >= basketRect.top && ballRect.top <= basketRect.bottom) {
           // Verifica se está dentro da área horizontal da cesta
           if (ballRect.left < basketRect.right && ballRect.right > basketRect.left) {
-            // Capturou!
-            minigameCaught++;
-            document.getElementById('minigame-caught').textContent = minigameCaught;
+            const isBad = pokeball.getAttribute('data-is-bad') === 'true';
+
+            if (isBad) {
+              // Pegou item RUIM: perde 1 ponto
+              minigameCaught = Math.max(0, minigameCaught - 1);
+              document.getElementById('minigame-caught').textContent = minigameCaught;
+              
+              // Efeito visual RUIM (vermelho)
+              basket.style.background = '#FF0000';
+              setTimeout(() => {
+                basket.style.background = '#8B4513';
+              }, 100);
+            } else {
+              // Pegou item BOM: ganha 1 ponto
+              minigameCaught++;
+              document.getElementById('minigame-caught').textContent = minigameCaught;
+              
+              // Efeito visual BOM (dourado)
+              basket.style.background = '#FFD700';
+              setTimeout(() => {
+                basket.style.background = '#8B4513';
+              }, 100);
+            }
+
             pokeball.remove();
             clearInterval(checkCollision);
-            
-            // Efeito visual de captura
-            basket.style.background = '#FFD700';
-            setTimeout(() => {
-              basket.style.background = '#8B4513';
-            }, 100);
           }
         }
         
@@ -27811,7 +27845,9 @@ GABARITO: A
       minigameActive = false;
       
       // Limpa timers
-      clearInterval(minigameTimer);
+      if (minigameTimer) {
+        clearInterval(minigameTimer);
+      }
       clearInterval(minigamePokeballInterval);
       
       // Remove controles
@@ -27831,10 +27867,10 @@ GABARITO: A
       
       resultDiv.classList.add('show');
       
-      if (minigameCaught >= 25) {
+      if (minigameCaught >= 30) {
         // Sucesso! Cura o Pokémon
         resultTitle.textContent = '🎉 SUCESSO! 🎉';
-        resultMessage.textContent = `Você capturou ${minigameCaught}/30 comprimidos!\nSeu ${pokemonData[game.player.pokemon].name} foi completamente curado!`;
+        resultMessage.textContent = `Você capturou ${minigameCaught}/50 comprimidos!\nSeu ${pokemonData[game.player.pokemon].name} foi completamente curado!`;
         resultTitle.style.color = '#00ff00';
         
         // Cura o Pokémon
@@ -27844,7 +27880,7 @@ GABARITO: A
       } else {
         // Falhou
         resultTitle.textContent = '😢 FALHOU! 😢';
-        resultMessage.textContent = `Você capturou apenas ${minigameCaught}/30 comprimidos.\nPrecisa capturar pelo menos 25 para curar seu Pokémon.\nTente novamente!`;
+        resultMessage.textContent = `Você capturou apenas ${minigameCaught}/50 comprimidos.\nPrecisa capturar pelo menos 30 para curar seu Pokémon.\nTente novamente!`;
         resultTitle.style.color = '#ff0000';
       }
     }
