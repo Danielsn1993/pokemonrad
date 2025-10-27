@@ -281,7 +281,7 @@
     }
 
     .exp-fill {
-      background: linear-gradient(90deg, #ffcc00, #ff8800);
+      background: linear-gradient(90deg, #4169E1, #1E90FF);
     }
 
     .potion-container {
@@ -27430,7 +27430,15 @@ GABARITO: A
             document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
             
             const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-            document.getElementById('battle-hp-bar').style.width = hpPercent + '%';
+            const hpBar = document.getElementById('battle-hp-bar');
+
+            if (hpPercent > 50) {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+            } else if (hpPercent > 20) {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+            } else {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+            }
             
             const opponentPokemon = pokemonData[game.currentOpponent.name];
             document.getElementById('opponent-name').textContent = `Líder ${gym.name}`;
@@ -27441,7 +27449,15 @@ GABARITO: A
             applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
             
             const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-            document.getElementById('opponent-hp-bar').style.width = oppHpPercent + '%';
+            const oppHpBar = document.getElementById('opponent-hp-bar');
+
+            if (oppHpPercent > 50) {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+            } else if (oppHpPercent > 20) {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+            } else {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+            }
             
             document.getElementById('battle-message').innerHTML = `${gym.name} desafia você para uma batalha!`;
             
@@ -27459,7 +27475,15 @@ GABARITO: A
             document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
             
             const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-            document.getElementById('battle-hp-bar').style.width = hpPercent + '%';
+            const hpBar = document.getElementById('battle-hp-bar');
+
+            if (hpPercent > 50) {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+            } else if (hpPercent > 20) {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+            } else {
+              hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+            }
             
             const opponentPokemon = pokemonData[game.currentOpponent.name];
             document.getElementById('opponent-name').textContent = `${elite.name} - ${elite.title}`;
@@ -27470,7 +27494,15 @@ GABARITO: A
             applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
             
             const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-            document.getElementById('opponent-hp-bar').style.width = oppHpPercent + '%';
+            const oppHpBar = document.getElementById('opponent-hp-bar');
+
+            if (oppHpPercent > 50) {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+            } else if (oppHpPercent > 20) {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+            } else {
+              oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+            }
             
             document.getElementById('battle-message').innerHTML = `${elite.name} desafia você!`;
             
@@ -27957,15 +27989,15 @@ GABARITO: A
       document.getElementById('potion-count').textContent = game.player.potions;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      document.getElementById('hp-bar').style.width = hpPercent + '%';
+      const hpBar = document.getElementById('hp-bar');
 
       // Atualiza cor da barra baseado na porcentagem
       if (hpPercent > 50) {
-        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #00ff00, #00cc00)';
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
       } else if (hpPercent > 20) {
-        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #ffff00, #ff9900)';
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
       } else {
-        document.getElementById('hp-bar').style.background = 'linear-gradient(to right, #ff0000, #cc0000)';
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
       }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
@@ -28100,13 +28132,31 @@ GABARITO: A
       document.getElementById('training-level').textContent = game.player.level;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      document.getElementById('training-battle-hp-bar').style.width = hpPercent + '%';
+      const hpBar = document.getElementById('training-battle-hp-bar');
       document.getElementById('training-battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
+      
+      // Atualiza cor e largura da barra de HP do jogador
+      if (hpPercent > 50) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (hpPercent > 20) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       if (game.trainingOpponent) {
         const oppHpPercent = (game.trainingOpponent.hp / game.trainingOpponent.maxHp) * 100;
-        document.getElementById('training-opponent-hp-bar').style.width = oppHpPercent + '%';
+        const oppHpBar = document.getElementById('training-opponent-hp-bar');
         document.getElementById('training-opponent-hp-display').textContent = `${game.trainingOpponent.hp}/${game.trainingOpponent.maxHp}`;
+        
+        // Atualiza cor e largura da barra de HP do oponente
+        if (oppHpPercent > 50) {
+          oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+        } else if (oppHpPercent > 20) {
+          oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+        } else {
+          oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+        }
       }
     }
 
@@ -28387,7 +28437,15 @@ GABARITO: A
       document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      document.getElementById('battle-hp-bar').style.width = hpPercent + '%';
+      const hpBar = document.getElementById('battle-hp-bar');
+
+      if (hpPercent > 50) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (hpPercent > 20) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
       document.getElementById('battle-exp-bar').style.width = expPercent + '%';
@@ -28402,7 +28460,15 @@ GABARITO: A
       applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
       
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      document.getElementById('opponent-hp-bar').style.width = oppHpPercent + '%';
+      const oppHpBar = document.getElementById('opponent-hp-bar');
+
+      if (oppHpPercent > 50) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (oppHpPercent > 20) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       document.getElementById('battle-message').innerHTML = `${gym.name} desafia você para uma batalha!`;
       
@@ -28428,7 +28494,15 @@ GABARITO: A
       document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      document.getElementById('battle-hp-bar').style.width = hpPercent + '%';
+      const hpBar = document.getElementById('battle-hp-bar');
+
+      if (hpPercent > 50) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (hpPercent > 20) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
       document.getElementById('battle-exp-bar').style.width = expPercent + '%';
@@ -28443,7 +28517,15 @@ GABARITO: A
       applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
       
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      document.getElementById('opponent-hp-bar').style.width = oppHpPercent + '%';
+      const oppHpBar = document.getElementById('opponent-hp-bar');
+
+      if (oppHpPercent > 50) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (oppHpPercent > 20) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       document.getElementById('battle-message').innerHTML = `${elite.name} desafia você!`;
       
@@ -28766,14 +28848,32 @@ GABARITO: A
       }, 1500);
     }
 
-    function updateBattleDisplay() {
+   function updateBattleDisplay() {
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      document.getElementById('battle-hp-bar').style.width = hpPercent + '%';
+      const hpBar = document.getElementById('battle-hp-bar');
       document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
       
+      // Atualiza cor e largura da barra de HP do jogador
+      if (hpPercent > 50) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (hpPercent > 20) {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
+      
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      document.getElementById('opponent-hp-bar').style.width = oppHpPercent + '%';
+      const oppHpBar = document.getElementById('opponent-hp-bar');
       document.getElementById('opponent-hp-display').textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
+      
+      // Atualiza cor e largura da barra de HP do oponente
+      if (oppHpPercent > 50) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
+      } else if (oppHpPercent > 20) {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ffff00, #ff9900);`;
+      } else {
+        oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
+      }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
       document.getElementById('battle-exp-bar').style.width = expPercent + '%';
