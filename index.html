@@ -829,7 +829,7 @@
       height: 90%;
       max-width: 540px;
       max-height: 90vh;
-      background: linear-gradient(135deg, #87CEEB, #98D8E8);
+      background: linear-gradient(135deg, #001F3F, #003366);
       border: 5px solid #000;
       border-radius: 15px;
       padding: 20px;
@@ -876,8 +876,8 @@
     }
 
     .minigame-score {
-      font-size: 18px;
-      color: #000;
+      font-size: 25px;
+      color: white;
     }
 
     .minigame-area {
@@ -1245,9 +1245,9 @@
     <div class="minigame-header">
       <h2>Captura de Comprimidos!</h2>
       <div class="minigame-timer">
-        ITENS: <span id="minigame-time">50</span>
+        ITENS TOTAIS: <span id="minigame-time">50</span>
       </div>
-      <div class="minigame-score">Comprimidos: <span id="minigame-caught">0</span>/50</div>
+      <div class="minigame-score">Comprimidos capturados: <span id="minigame-caught">0</span>/30</div>
     </div>
     
     <div class="minigame-area" id="minigame-area">
@@ -27785,7 +27785,7 @@ GABARITO: A
       pokeball.style.top = '0px';
       
       // Velocidade de queda (2 segundos para cair)
-      pokeball.style.animationDuration = '1.6s';
+      pokeball.style.animationDuration = '1.70s';
       
       gameArea.appendChild(pokeball);
       
@@ -27870,7 +27870,7 @@ GABARITO: A
       if (minigameCaught >= 30) {
         // Sucesso! Cura o Pokémon
         resultTitle.textContent = '🎉 SUCESSO! 🎉';
-        resultMessage.textContent = `Você capturou ${minigameCaught}/50 comprimidos!\nSeu ${pokemonData[game.player.pokemon].name} foi completamente curado!`;
+        resultMessage.textContent = `Você capturou ${minigameCaught} comprimidos!\nSeu ${pokemonData[game.player.pokemon].name} foi completamente curado!`;
         resultTitle.style.color = '#00ff00';
         
         // Cura o Pokémon
@@ -27880,7 +27880,7 @@ GABARITO: A
       } else {
         // Falhou
         resultTitle.textContent = '😢 FALHOU! 😢';
-        resultMessage.textContent = `Você capturou apenas ${minigameCaught}/50 comprimidos.\nPrecisa capturar pelo menos 30 para curar seu Pokémon.\nTente novamente!`;
+        resultMessage.textContent = `Você capturou apenas ${minigameCaught} comprimidos.\nPrecisa capturar pelo menos 30 para curar seu Pokémon.\nTente novamente!`;
         resultTitle.style.color = '#ff0000';
       }
     }
