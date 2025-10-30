@@ -27859,7 +27859,7 @@ GABARITO: A
     const trainingPokemon = ['rattata', 'raticate', 'spearow', 'fearow', 'ekans', 'sandshrew', 'sandslash', 'nidorina', 'nidorino', 'clefairy', 'vulpix', 'jigglypuff', 'zubat', 'oddish', 'gloom', 'paras', 'parasect', 'venonat', 'diglett', 'meowth', 'persian', 'psyduck', 'golduck', 'mankey', 'primeape', 'poliwag', 'poliwhirl', 'bellsprout', 'weepinbell'];
 
     const gyms = [
-      { name: 'Brock', city: 'Pewter City', badge: 'Boulder Badge', requiredLevel: 10, pokemon: [{ name: 'geodude', level: 10 }, { name: 'onix', level: 14 }], background: 'pokemon_assets/images/brock_bg.png' },
+      { name: 'Brock', city: 'Pewter City', badge: 'Boulder Badge', requiredLevel: 10, pokemon: [{ name: 'geodude', level: 10 }, { name: 'onix', level: 14 }] },
       { name: 'Misty', city: 'Cerulean City', badge: 'Cascade Badge', requiredLevel: 18, pokemon: [{ name: 'staryu', level: 23 }, { name: 'starmie', level: 25 }] },
       { name: 'Lt. Surge', city: 'Vermilion City', badge: 'Thunder Badge', requiredLevel: 25, pokemon: [{ name: 'voltorb', level: 27 }, { name: 'pikachu', level: 30 }, { name: 'raichu', level: 33 }] },
       { name: 'Erika', city: 'Celadon City', badge: 'Rainbow Badge', requiredLevel: 30, pokemon: [{ name: 'victreebel', level: 33 }, { name: 'tangela', level: 35 }, { name: 'vileplume', level: 39 }] },
@@ -28674,10 +28674,6 @@ GABARITO: A
 
       showScreen('battle-screen');
       audioSystem.play('gym-music');
-
-      setTimeout(() => {
-        document.querySelector('.battle-pokemon-container').style.backgroundImage = `url(${gym.background})`;
-      }, 50);
       
       const playerData = pokemonData[game.player.pokemon];
       document.getElementById('battle-player-sprite').src = playerData.sprite;
