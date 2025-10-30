@@ -15866,7 +15866,7 @@ A) São comumente unilaterais, envolvendo ângulos costofrênicos e pleura media
 B) É frequente a transformação maligna destas lesões (mesotelioma pleural).
 C) Calcificações são comuns e a maior parte associa-se à fibrose pulmonar, denominada asbestose.
 D) Possuem distribuição assimétrica e é comum o comprometimento da pleura diafragmática.
-E) podem estar associadas à atelectasia redonda, a qual não apresenta realce pelo meio de contraste.
+E) Podem estar associadas à atelectasia redonda, a qual não apresenta realce pelo meio de contraste.
 GABARITO: D
 QUESTÃO 1450
 
@@ -18092,7 +18092,7 @@ E) A característica da doença de von Hippel-Lindau envolvendo os rins é de ci
 GABARITO: D
 QUESTÃO 1672
 https://s3.amazonaws.com/brainscape-prod/system/cm/623/019/009/q_image_ios.?1756324548
-Mulher de 32 anos, assintomática, apresenta nódulos hepáticos e cistos renais identificados e exame de ultrassonografia. Tomografia computadorizada com contraste endovenoso, solicitada de forma complementar. Qual o diagnóstico do achado focal no rim esquerdo?
+Mulher de 32 anos, assintomática, apresenta nódulos hepáticos e cistos renais identificados em exame de ultrassonografia. Tomografia computadorizada com contraste endovenoso, solicitada de forma complementar. Qual o diagnóstico do achado focal no rim esquerdo?
 
 A) Cisto Bosniak IIF.
 B) Divertículo calicinal.
@@ -25705,11 +25705,11 @@ QUESTÃO 2431
 
 Com relação às placas pleurais relacionadas à exposição ao asbesto é correto afirmar que:
 
-A) são comumente unilaterais, envolvendo ângulos costofrênicos e pleura mediastinal.
-B) é frequente a transformação maligna destas lesões (mesotelioma pleural).
-C) calcificações são comuns e a maior parte associa-se à fibrose pulmonar, denominada asbestose.
-D) possuem distribuição assimétrica e é comum o comprometimento da pleura diafragmática.
-E) podem estar associadas à atelectasia redonda, a qual não apresenta realce pelo meio de contraste.
+A) São comumente unilaterais, envolvendo ângulos costofrênicos e pleura mediastinal.
+B) É frequente a transformação maligna destas lesões (mesotelioma pleural).
+C) Calcificações são comuns e a maior parte associa-se à fibrose pulmonar, denominada asbestose.
+D) Possuem distribuição assimétrica e é comum o comprometimento da pleura diafragmática.
+E) Podem estar associadas à atelectasia redonda, a qual não apresenta realce pelo meio de contraste.
 GABARITO: D
 QUESTÃO 2432
 
@@ -27689,6 +27689,7 @@ GABARITO: A
             }
             
             document.getElementById('battle-message').innerHTML = `${gym.name} desafia você para uma batalha!`;
+            document.getElementById('battle-message').style.background = 'rgba(0, 0, 0, 0.9)';
             
             nextBattleQuestion();
           } else if (game.battleType === 'elite' && game.currentElite !== null) {
@@ -27734,6 +27735,7 @@ GABARITO: A
             }
             
             document.getElementById('battle-message').innerHTML = `${elite.name} desafia você!`;
+            document.getElementById('battle-message').style.background = 'rgba(0, 0, 0, 0.9)';
             
             nextBattleQuestion();
           }
@@ -27777,7 +27779,7 @@ GABARITO: A
       starmie: { name: 'Starmie', sprite: 'pokemon_assets/sprites_front/starmie.gif', scale: 1.3, offsetY: 0 },
       voltorb: { name: 'Voltorb', sprite: 'pokemon_assets/sprites_front/voltorb.gif', scale: 0.7, offsetY: 30 },
       pikachu: { name: 'Pikachu', sprite: 'pokemon_assets/sprites_front/pikachu.gif', scale: 1.0, offsetY: 50 },
-      raichu: { name: 'Raichu', sprite: 'pokemon_assets/sprites_front/raichu.gif', scale: 1.4, offsetY: -40 },
+      raichu: { name: 'Raichu', sprite: 'pokemon_assets/sprites_front/raichu.gif', scale: 1.2, offsetY: -40 },
       victreebel: { name: 'Victreebel', sprite: 'pokemon_assets/sprites_front/victreebel.gif', scale: 1.5, offsetY: 40 },
       tangela: { name: 'Tangela', sprite: 'pokemon_assets/sprites_front/tangela.gif', scale: 1.0, offsetY: 40 },
       vileplume: { name: 'Vileplume', sprite: 'pokemon_assets/sprites_front/vileplume.gif', scale: 1.0, offsetY: 80 },
@@ -27789,7 +27791,7 @@ GABARITO: A
       mrmime: { name: 'Mr. Mime', sprite: 'pokemon_assets/sprites_front/mrmime.gif', scale: 1.2, offsetY: 40 },
       venomoth: { name: 'Venomoth', sprite: 'pokemon_assets/sprites_front/venomoth.gif', scale: 1.3, offsetY: 40 },
       alakazam: { name: 'Alakazam', sprite: 'pokemon_assets/sprites_front/alakazam.gif', scale: 1.3, offsetY: 40 },
-      growlithe: { name: 'Growlithe', sprite: 'pokemon_assets/sprites_front/growlithe.gif', scale: 1.0, offsetY: 0 },
+      growlithe: { name: 'Growlithe', sprite: 'pokemon_assets/sprites_front/growlithe.gif', scale: 0.9, offsetY: 0 },
       ponyta: { name: 'Ponyta', sprite: 'pokemon_assets/sprites_front/ponyta.gif', scale: 1.1, offsetY: 0 },
       rapidash: { name: 'Rapidash', sprite: 'pokemon_assets/sprites_front/rapidash.gif', scale: 1.6, offsetY: 40 },
       arcanine: { name: 'Arcanine', sprite: 'pokemon_assets/sprites_front/arcanine.gif', scale: 1.2, offsetY: 0 },
@@ -28476,7 +28478,7 @@ GABARITO: A
                 } else {
                   game.player.expToNext = Math.floor(50 * Math.pow(1.1, game.player.level - 1));
                 }
-                game.player.maxHp += 5;
+                game.player.maxHp += 15;
                 game.player.hp = game.player.maxHp;
                 messageEl.innerHTML += `<br>🎉 LEVEL UP! ${pokemonData[game.player.pokemon].name} subiu para o nível ${game.player.level}!`;
                 
@@ -28667,7 +28669,6 @@ GABARITO: A
 
     function startBattle(gym) {
       document.getElementById('battle-potion-btn').disabled = false;
-      document.getElementById('back-to-map-btn').disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
@@ -28716,6 +28717,7 @@ GABARITO: A
       }
       
       document.getElementById('battle-message').innerHTML = `${gym.name} desafia você para uma batalha!`;
+      document.getElementById('battle-message').style.background = 'rgba(0, 0, 0, 0.9)';
       
       nextBattleQuestion();
 
@@ -28724,7 +28726,6 @@ GABARITO: A
 
     function startEliteBattle(elite) {
       document.getElementById('battle-potion-btn').disabled = false;
-      document.getElementById('back-to-map-btn').disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
@@ -28799,7 +28800,6 @@ GABARITO: A
 
     function checkBattleAnswer(selected, correct, questionIndex) {
       document.getElementById('battle-potion-btn').disabled = true;
-      document.getElementById('back-to-map-btn').disabled = true;
 
       saveGame();
       
@@ -28892,7 +28892,7 @@ GABARITO: A
                 } else {
                   game.player.expToNext = Math.floor(50 * Math.pow(1.1, game.player.level - 1));
                 }
-                game.player.maxHp += 5;
+                game.player.maxHp += 15;
                 leveledUp = true;
               }
 
@@ -28963,7 +28963,7 @@ GABARITO: A
                   } else {
                     game.player.expToNext = Math.floor(50 * Math.pow(1.1, game.player.level - 1));
                   }
-                  game.player.maxHp += 5;
+                  game.player.maxHp += 15;
                   leveledUp = true;
                 }
                 
@@ -29004,7 +29004,7 @@ GABARITO: A
                     } else {
                       game.player.expToNext = Math.floor(50 * Math.pow(1.1, game.player.level - 1));
                     }
-                    game.player.maxHp += 5;
+                    game.player.maxHp += 15;
                     leveledUpBonus = true;
                   }
                 }
@@ -29054,7 +29054,6 @@ GABARITO: A
       
       // ADICIONAR ESTAS LINHAS NO INÍCIO:
       document.getElementById('battle-potion-btn').disabled = true;
-      document.getElementById('back-to-map-btn').disabled = true;
 
       const messageEl = document.getElementById('battle-message');
       const damage = 5 + Math.floor(game.currentOpponent.level);
@@ -29087,7 +29086,6 @@ GABARITO: A
 
         // ADICIONAR ESTA LINHA ANTES DE nextBattleQuestion():
         document.getElementById('battle-potion-btn').disabled = false;
-        document.getElementById('back-to-map-btn').disabled = false;
 
         nextBattleQuestion();
       }, 1500);
