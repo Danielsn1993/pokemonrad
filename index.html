@@ -3756,11 +3756,6 @@ GABARITO: C
               messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
               
               setTimeout(() => {
-                console.log('🔒 BLOQUEANDO BOTÕES');
-                document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
-                const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
-                answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
-                
                 currentBattleQuestion = null;
                 const nextPokemonIndex = game.currentOpponent.index;
                 const nextPokemon = pokemonList[nextPokemonIndex];
@@ -3774,28 +3769,26 @@ GABARITO: C
                 
                 saveGame();
                 
-                console.log('📞 Chamando startBattle');
                 if (game.battleType === 'gym') {
                   startBattle(opponent);
                 } else {
                   startEliteBattle(opponent);
                 }
                 
+                // Chama com true para bloquear durante a troca
+                nextBattleQuestion(true);  // ← BLOQUEIA
+                
                 setTimeout(() => {
-                  console.log('👻 Opacity = 0');
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
                   opponentSprite.style.transition = 'opacity 0.5s';
                   opponentSprite.style.opacity = '0';
                   
                   setTimeout(() => {
-                    console.log('✨ Opacity = 1 (COMEÇA FADE)');
                     opponentSprite.style.opacity = '1';
                     
                     setTimeout(() => {
-                      console.log('🔓 DESBLOQUEANDO BOTÕES');
-                      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
-                      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
-                      answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
+                      // Chama com false para desbloquear após animação
+                      nextBattleQuestion(false);  // ← DESBLOQUEIA
                     }, 600);
                   }, 1000);
                 }, 1000);
