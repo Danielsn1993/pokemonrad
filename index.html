@@ -3775,8 +3775,7 @@ GABARITO: C
                   startEliteBattle(opponent);
                 }
                 
-                // Chama com true para bloquear durante a troca
-                nextBattleQuestion(true);  // ← BLOQUEIA
+                nextBattleQuestion(true);  // ← APENAS isso (bloqueia alternativas)
                 
                 setTimeout(() => {
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
@@ -3787,8 +3786,7 @@ GABARITO: C
                     opponentSprite.style.opacity = '1';
                     
                     setTimeout(() => {
-                      // Chama com false para desbloquear após animação
-                      nextBattleQuestion(false);  // ← DESBLOQUEIA
+                      nextBattleQuestion(false);  // ← APENAS isso (desbloqueia alternativas)
                     }, 600);
                   }, 1000);
                 }, 1000);
