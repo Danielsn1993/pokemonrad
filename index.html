@@ -3727,6 +3727,9 @@ GABARITO: C
             saveGame();
             
             setTimeout(() => {
+              const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
+              opponentSprite.style.transition = 'opacity 0.5s';
+              opponentSprite.style.opacity = '0';
               if(game.player.level < 100) {
                 const expGain = 15 + Math.floor(defeatedPokemon.level * 6);
                 messageEl.innerHTML = `${pokemonData[defeatedPokemon.name].name} foi derrotado!<br>${pokemonData[game.player.pokemon].name} ganhou ${expGain} EXP!`;
@@ -3746,31 +3749,25 @@ GABARITO: C
                 messageEl.innerHTML = `${opponent.name} enviou ${pokemonData[nextPokemon.name].name}!`;
                 messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
                 
-                // Fade-out do sprite do oponente derrotado
-                const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
-                opponentSprite.style.transition = 'opacity 0.3s';
-                opponentSprite.style.opacity = '0';
+                // Atualiza enquanto ainda está invisível
+                game.currentOpponent = { ...nextPokemon };
+                game.currentOpponent.index = nextPokemonIndex;
+                game.currentOpponent.allPokemon = pokemonList;
                 
+                saveGame();
+                
+                if (game.battleType === 'gym') {
+                  startBattle(opponent);
+                } else {
+                  startEliteBattle(opponent);
+                }
+                
+                // FADE-IN após tudo estar posicionado
                 setTimeout(() => {
-                  // Atualiza o oponente enquanto está invisível
-                  game.currentOpponent = { ...nextPokemon };
-                  game.currentOpponent.index = nextPokemonIndex;
-                  game.currentOpponent.allPokemon = pokemonList;
-                  
-                  saveGame();
-                  
-                  if (game.battleType === 'gym') {
-                    startBattle(opponent);
-                  } else {
-                    startEliteBattle(opponent);
-                  }
-                  
-                  // Fade-in do novo sprite
-                  setTimeout(() => {
-                    opponentSprite.style.opacity = '1';
-                  }, 50);
-                }, 300);
-                              
+                  const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
+                  opponentSprite.style.opacity = '1';
+                }, 100);
+                          
               }, 3500);
             }, 1500);
             
