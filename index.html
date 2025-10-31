@@ -3553,9 +3553,6 @@ GABARITO: C
       
       nextBattleQuestion();
 
-      if (!skipQuestion) {
-        nextBattleQuestion();
-      }
       document.getElementById('battle-potion-count' + suffix).textContent = game.player.potions;
     }
 
@@ -3611,9 +3608,8 @@ GABARITO: C
       
       document.getElementById('battle-message' + suffix).innerHTML = `${elite.name} desafia você!`;
       
-      if (!skipQuestion) {
-        nextBattleQuestion();
-      }
+      nextBattleQuestion();
+
       document.getElementById('battle-potion-count' + suffix).textContent = game.player.potions;
     }
 
@@ -3778,10 +3774,14 @@ GABARITO: C
                 
                 console.log('📞 Chamando startBattle');
                 if (game.battleType === 'gym') {
-                  startBattle(opponent, true);  // ← Adicione true aqui
+                  startBattle(opponent);
                 } else {
-                  startEliteBattle(opponent, true);  // ← Adicione true aqui
+                  startEliteBattle(opponent);
                 }
+
+                // DESABILITA OS BOTÕES IMEDIATAMENTE APÓS CRIAR
+                const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
+                answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
 
                 setTimeout(() => {
                   console.log('👻 Opacity = 0');
@@ -3796,7 +3796,8 @@ GABARITO: C
                     setTimeout(() => {
                       console.log('🔓 DESBLOQUEANDO BOTÕES');
                       document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
-                      nextBattleQuestion();  // ← AGORA CHAMA AQUI
+                      
+                      // AGORA SIM HABILITA
                       const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
                     }, 600);
