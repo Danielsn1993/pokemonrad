@@ -3741,13 +3741,16 @@ GABARITO: C
               setTimeout(() => {
                 currentBattleQuestion = null;
                 const nextPokemonIndex = game.currentOpponent.index;
-                game.currentOpponent = { ...pokemonList[nextPokemonIndex] };
-                game.currentOpponent.index = nextPokemonIndex;
-                game.currentOpponent.allPokemon = pokemonList;
+                const nextPokemon = pokemonList[nextPokemonIndex];
                 
-                messageEl.innerHTML = `${opponent.name} enviou ${pokemonData[game.currentOpponent.name].name}!`;
+                messageEl.innerHTML = `${opponent.name} enviou ${pokemonData[nextPokemon.name].name}!`;
                 messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
                 
+                // Atualiza o oponente DENTRO das funções de batalha
+                game.currentOpponent = { ...nextPokemon };
+                game.currentOpponent.index = nextPokemonIndex;
+                game.currentOpponent.allPokemon = pokemonList;
+
                 saveGame();
                 
                 if (game.battleType === 'gym') {
@@ -3755,7 +3758,7 @@ GABARITO: C
                 } else {
                   startEliteBattle(opponent);
                 }
-                                
+                              
               }, 3500);
             }, 1500);
             
