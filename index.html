@@ -2500,6 +2500,8 @@ GABARITO: C
             
             document.getElementById('battle-message' + suffix).innerHTML = `${gym.name} desafia você para uma batalha!`;
             document.getElementById('battle-message' + suffix).style.background = 'rgba(0, 0, 0, 0.9)';
+
+            updateBattleDisplay();
             
             nextBattleQuestion();
           } else if (game.battleType === 'elite' && game.currentElite !== null) {
@@ -2549,6 +2551,8 @@ GABARITO: C
             
             document.getElementById('battle-message' + suffix).innerHTML = `${elite.name} desafia você!`;
             document.getElementById('battle-message' + suffix).style.background = 'rgba(0, 0, 0, 0.9)';
+
+            updateBattleDisplay();
             
             nextBattleQuestion();
           }
