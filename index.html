@@ -3762,13 +3762,19 @@ GABARITO: C
                   startEliteBattle(opponent);
                 }
                 
-                // FADE-IN após tudo estar posicionado
+                // Garante invisibilidade DEPOIS do startBattle
                 setTimeout(() => {
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
-                  opponentSprite.style.opacity = '1';
-                }, 100);
+                  opponentSprite.style.transition = 'opacity 0.5s';
+                  opponentSprite.style.opacity = '0';
+                  
+                  // FADE-IN após garantir que está invisível
+                  setTimeout(() => {
+                    opponentSprite.style.opacity = '1';
+                  }, 50);
+                }, 10);
                           
-              }, 3500);
+              }, 1500);
             }, 1500);
             
             return;
