@@ -3742,7 +3742,7 @@ GABARITO: C
               messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
               
               setTimeout(() => {
-                // ← ADICIONE ISTO NO INÍCIO:
+                console.log('🔒 BLOQUEANDO BOTÕES');
                 document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
                 const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                 answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
@@ -3760,6 +3760,7 @@ GABARITO: C
                 
                 saveGame();
                 
+                console.log('📞 Chamando startBattle');
                 if (game.battleType === 'gym') {
                   startBattle(opponent);
                 } else {
@@ -3767,19 +3768,21 @@ GABARITO: C
                 }
                 
                 setTimeout(() => {
+                  console.log('👻 Opacity = 0');
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
                   opponentSprite.style.transition = 'opacity 0.5s';
                   opponentSprite.style.opacity = '0';
                   
                   setTimeout(() => {
+                    console.log('✨ Opacity = 1 (COMEÇA FADE)');
                     opponentSprite.style.opacity = '1';
                     
                     setTimeout(() => {
-                      console.log('🔓 DESBLOQUEANDO BOTÕES AGORA MESMO!');  // ← Teste
+                      console.log('🔓 DESBLOQUEANDO BOTÕES');
                       document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
                       const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
-                    }, 1100);
+                    }, 600);
                   }, 1000);
                 }, 1000);
                           
