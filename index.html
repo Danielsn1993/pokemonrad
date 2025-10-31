@@ -3771,6 +3771,11 @@ GABARITO: C
                   // FADE-IN após garantir que está invisível
                   setTimeout(() => {
                     opponentSprite.style.opacity = '1';
+                    setTimeout(() => {
+                      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
+                      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
+                      answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
+                    }, 600);
                   }, 1000);
                 }, 1000);
                           
