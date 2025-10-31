@@ -3613,7 +3613,7 @@ GABARITO: C
       document.getElementById('battle-potion-count' + suffix).textContent = game.player.potions;
     }
 
-    function nextBattleQuestion() {
+    function nextBattleQuestion(disableDuringSwitch = false) {
       if (!currentBattleQuestion) {
         currentBattleQuestion = generateQuestion();
       }
@@ -3623,10 +3623,12 @@ GABARITO: C
       
       const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
       answersDiv.innerHTML = '';
+      
       currentBattleQuestion.allAnswers.forEach(ans => {
         const btn = document.createElement('button');
         btn.textContent = ans;
         btn.onclick = () => checkBattleAnswer(ans, currentBattleQuestion.answer, currentBattleQuestion.index);
+        btn.disabled = disableDuringSwitch;  // ← APENAS as alternativas
         answersDiv.appendChild(btn);
       });
     }
