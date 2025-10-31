@@ -3746,18 +3746,30 @@ GABARITO: C
                 messageEl.innerHTML = `${opponent.name} enviou ${pokemonData[nextPokemon.name].name}!`;
                 messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
                 
-                // Atualiza o oponente DENTRO das funções de batalha
-                game.currentOpponent = { ...nextPokemon };
-                game.currentOpponent.index = nextPokemonIndex;
-                game.currentOpponent.allPokemon = pokemonList;
-
-                saveGame();
+                // Fade-out do sprite do oponente derrotado
+                const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
+                opponentSprite.style.transition = 'opacity 0.3s';
+                opponentSprite.style.opacity = '0';
                 
-                if (game.battleType === 'gym') {
-                  startBattle(opponent);
-                } else {
-                  startEliteBattle(opponent);
-                }
+                setTimeout(() => {
+                  // Atualiza o oponente enquanto está invisível
+                  game.currentOpponent = { ...nextPokemon };
+                  game.currentOpponent.index = nextPokemonIndex;
+                  game.currentOpponent.allPokemon = pokemonList;
+                  
+                  saveGame();
+                  
+                  if (game.battleType === 'gym') {
+                    startBattle(opponent);
+                  } else {
+                    startEliteBattle(opponent);
+                  }
+                  
+                  // Fade-in do novo sprite
+                  setTimeout(() => {
+                    opponentSprite.style.opacity = '1';
+                  }, 50);
+                }, 300);
                               
               }, 3500);
             }, 1500);
