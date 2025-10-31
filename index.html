@@ -3786,6 +3786,7 @@ GABARITO: C
                     opponentSprite.style.opacity = '1';
                     
                     setTimeout(() => {
+                      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
                       nextBattleQuestion(false);  // ← APENAS isso (desbloqueia alternativas)
                     }, 600);
                   }, 1000);
