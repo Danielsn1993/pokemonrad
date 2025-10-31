@@ -3742,6 +3742,11 @@ GABARITO: C
               messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
               
               setTimeout(() => {
+                // ← ADICIONE ISTO NO INÍCIO:
+                document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
+                const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
+                answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                
                 currentBattleQuestion = null;
                 const nextPokemonIndex = game.currentOpponent.index;
                 const nextPokemon = pokemonList[nextPokemonIndex];
@@ -3749,7 +3754,6 @@ GABARITO: C
                 messageEl.innerHTML = `${opponent.name} enviou ${pokemonData[nextPokemon.name].name}!`;
                 messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
                 
-                // Atualiza enquanto ainda está invisível
                 game.currentOpponent = { ...nextPokemon };
                 game.currentOpponent.index = nextPokemonIndex;
                 game.currentOpponent.allPokemon = pokemonList;
@@ -3762,16 +3766,16 @@ GABARITO: C
                   startEliteBattle(opponent);
                 }
                 
-                // Garante invisibilidade DEPOIS do startBattle
                 setTimeout(() => {
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
                   opponentSprite.style.transition = 'opacity 0.5s';
                   opponentSprite.style.opacity = '0';
                   
-                  // FADE-IN após garantir que está invisível
                   setTimeout(() => {
                     opponentSprite.style.opacity = '1';
+                    
                     setTimeout(() => {
+                      console.log('🔓 DESBLOQUEANDO BOTÕES AGORA!');  // ← Teste
                       document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
                       const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
