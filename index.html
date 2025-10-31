@@ -3487,7 +3487,6 @@ GABARITO: C
     function startBattle(gym) {
       currentBattleSuffix = '-gym-' + game.currentGym;  // ← ADICIONE ESTA LINHA
       const suffix = currentBattleSuffix;
-      document.getElementById('battle-potion-btn' + suffix).disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
@@ -3546,7 +3545,6 @@ GABARITO: C
     function startEliteBattle(elite) {
       currentBattleSuffix = '-elite-' + game.currentElite;  // ← ADICIONE ESTA LINHA
       const suffix = currentBattleSuffix;
-      document.getElementById('battle-potion-btn' + suffix).disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
