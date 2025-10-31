@@ -308,11 +308,76 @@
       margin-bottom: 10px;
       position: relative;
       width: 100%;
-      max-width: 1000px; /* Ajuste esse valor para mudar o tamanho */
+      max-width: 1000px;
       margin-left: auto;
       margin-right: auto;
       aspect-ratio: 896 / 1152;
       overflow: hidden;
+    }
+
+    /* Ginásio 0 - Brock (Pewter City) - Pedra */
+    .battle-pokemon-container.gym-0 {
+      background-image: url('pokemon_assets/images/brock_bg.png');
+    }
+
+    /* Ginásio 1 - Misty (Cerulean City) - Água */
+    .battle-pokemon-container.gym-1 {
+      background-image: url('pokemon_assets/images/misty_bg.png');
+    }
+
+    /* Ginásio 2 - Lt. Surge (Vermilion City) - Elétrico */
+    .battle-pokemon-container.gym-2 {
+      background-image: url('pokemon_assets/images/ltsurge_bg.png');
+    }
+
+    /* Ginásio 3 - Erika (Celadon City) - Grama */
+    .battle-pokemon-container.gym-3 {
+      background-image: url('pokemon_assets/images/erika_bg.png');
+    }
+
+    /* Ginásio 4 - Koga (Fuchsia City) - Veneno */
+    .battle-pokemon-container.gym-4 {
+      background-image: url('pokemon_assets/images/koga_bg.png');
+    }
+
+    /* Ginásio 5 - Sabrina (Saffron City) - Psíquico */
+    .battle-pokemon-container.gym-5 {
+      background-image: url('pokemon_assets/images/sabrina_bg.png');
+    }
+
+    /* Ginásio 6 - Blaine (Cinnabar Island) - Fogo */
+    .battle-pokemon-container.gym-6 {
+      background-image: url('pokemon_assets/images/blaine_bg.png');
+    }
+
+    /* Ginásio 7 - Giovanni (Viridian City) - Terra */
+    .battle-pokemon-container.gym-7 {
+      background-image: url('pokemon_assets/images/giovanni_bg.png');
+    }
+
+    /* Elite Four - Lorelei (Gelo) */
+    .battle-pokemon-container.elite-0 {
+      background-image: url('pokemon_assets/images/lorelei_bg.png');
+    }
+
+    /* Elite Four - Bruno (Luta) */
+    .battle-pokemon-container.elite-1 {
+      background-image: url('pokemon_assets/images/bruno_bg.png');
+    }
+
+    /* Elite Four - Agatha (Fantasma) */
+    .battle-pokemon-container.elite-2 {
+      background-image: url('pokemon_assets/images/agatha_bg.png');
+    }
+
+    /* Elite Four - Lance (Dragão) */
+    .battle-pokemon-container.elite-3 {
+      background-image: url('pokemon_assets/images/lance_bg.png');
+    }
+
+    /* Campeão - Ash */
+    .battle-pokemon-container.elite-4 {
+      background-image: url('pokemon_assets/images/ash_bg.png');
     }
 
     .pokemon-sprite {
@@ -1191,55 +1256,692 @@
       </div>
     </div>
 
-    <div id="battle-screen" class="screen">
+    <!-- GINÁSIO 0 - BROCK -->
+    <div id="battle-screen-gym-0" class="screen">
       <h1>⚔️ BATALHA POKEMON ⚔️</h1>
       
-      <div class="battle-pokemon-container">
+      <div class="battle-pokemon-container gym-0">
         <div class="battle-area">
           <div class="opponent-info">
-            <p><strong id="opponent-name">Pokemon</strong></p>
-            <p><span id="opponent-pokemon-name">Pokemon</span> - Nível <span id="opponent-level">5</span></p>
+            <p><strong id="opponent-name-gym-0">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-0">Pokemon</span> - Nível <span id="opponent-level-gym-0">5</span></p>
             <div class="battle-stat-bar">
-              <div class="stat-fill" id="opponent-hp-bar" style="width: 100%"></div>
+              <div class="stat-fill" id="opponent-hp-bar-gym-0" style="width: 100%"></div>
             </div>
-            <p>HP: <span id="opponent-hp-display">30/30</span></p>
+            <p>HP: <span id="opponent-hp-display-gym-0">30/30</span></p>
           </div>
 
           <div class="pokemon-sprite player-sprite">
-            <img id="battle-player-sprite" src="" alt="Seu Pokemon">
+            <img id="battle-player-sprite-gym-0" src="" alt="Seu Pokemon">
           </div>
           <div class="pokemon-sprite opponent-sprite">
-            <img id="battle-opponent-sprite" src="" alt="Pokemon">
+            <img id="battle-opponent-sprite-gym-0" src="" alt="Pokemon">
           </div>
 
           <div class="battle-player-info">
-            <p><span id="battle-player-name">---</span> Lv.<span id="battle-player-level">1</span></p>
+            <p><span id="battle-player-name-gym-0">---</span> Lv.<span id="battle-player-level-gym-0">1</span></p>
             <div class="battle-stat-bar">
-              <div class="stat-fill" id="battle-hp-bar" style="width: 100%"></div>
+              <div class="stat-fill" id="battle-hp-bar-gym-0" style="width: 100%"></div>
             </div>
-            <p>HP: <span id="battle-hp-display">15/15</span></p>
+            <p>HP: <span id="battle-hp-display-gym-0">15/15</span></p>
             <div class="battle-stat-bar">
-              <div class="stat-fill exp-fill" id="battle-exp-bar" style="width: 0%"></div>
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-0" style="width: 0%"></div>
             </div>
-            <p>EXP: <span id="battle-exp-display">0/50</span></p>
+            <p>EXP: <span id="battle-exp-display-gym-0">0/50</span></p>
           </div>
         </div>
       </div>
 
-      <div class="message-box" id="battle-message">
+      <div class="message-box" id="battle-message-gym-0">
         Responda corretamente para atacar o pokemon do líder do ginásio!
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn">
-          🧪 Usar Poção (<span id="battle-potion-count">0</span>)
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-0">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-0">0</span>)
         </button>
       </div>
 
       <div class="question-box">
-        <div class="question-counter" id="battle-counter">Questões: 0/0</div>
-        <h3 id="battle-question">Carregando questão...</h3>
-        <div class="answers" id="battle-answers"></div>
+        <div class="question-counter" id="battle-counter-gym-0">Questões: 0/0</div>
+        <h3 id="battle-question-gym-0">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-0"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 1 - MISTY -->
+    <div id="battle-screen-gym-1" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-1">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-1">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-1">Pokemon</span> - Nível <span id="opponent-level-gym-1">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-1" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-1">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-1" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-1" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-1">---</span> Lv.<span id="battle-player-level-gym-1">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-1" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-1">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-1" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-1">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-1">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-1">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-1">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-1">Questões: 0/0</div>
+        <h3 id="battle-question-gym-1">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-1"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 2 - LT. SURGE -->
+    <div id="battle-screen-gym-2" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-2">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-2">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-2">Pokemon</span> - Nível <span id="opponent-level-gym-2">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-2" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-2">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-2" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-2" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-2">---</span> Lv.<span id="battle-player-level-gym-2">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-2" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-2">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-2" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-2">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-2">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-2">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-2">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-2">Questões: 0/0</div>
+        <h3 id="battle-question-gym-2">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-2"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 3 - ERIKA -->
+    <div id="battle-screen-gym-3" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-3">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-3">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-3">Pokemon</span> - Nível <span id="opponent-level-gym-3">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-3" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-3">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-3" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-3" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-3">---</span> Lv.<span id="battle-player-level-gym-3">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-3" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-3">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-3" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-3">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-3">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-3">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-3">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-3">Questões: 0/0</div>
+        <h3 id="battle-question-gym-3">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-3"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 4 - KOGA -->
+    <div id="battle-screen-gym-4" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-4">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-4">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-4">Pokemon</span> - Nível <span id="opponent-level-gym-4">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-4" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-4">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-4" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-4" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-4">---</span> Lv.<span id="battle-player-level-gym-4">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-4" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-4">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-4" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-4">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-4">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-4">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-4">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-4">Questões: 0/0</div>
+        <h3 id="battle-question-gym-4">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-4"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 5 - SABRINA -->
+    <div id="battle-screen-gym-5" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-5">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-5">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-5">Pokemon</span> - Nível <span id="opponent-level-gym-5">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-5" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-5">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-5" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-5" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-5">---</span> Lv.<span id="battle-player-level-gym-5">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-5" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-5">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-5" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-5">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-5">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-5">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-5">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-5">Questões: 0/0</div>
+        <h3 id="battle-question-gym-5">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-5"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 6 - BLAINE -->
+    <div id="battle-screen-gym-6" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-6">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-6">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-6">Pokemon</span> - Nível <span id="opponent-level-gym-6">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-6" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-6">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-6" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-6" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-6">---</span> Lv.<span id="battle-player-level-gym-6">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-6" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-6">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-6" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-6">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-6">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-6">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-6">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-6">Questões: 0/0</div>
+        <h3 id="battle-question-gym-6">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-6"></div>
+      </div>
+    </div>
+
+    <!-- GINÁSIO 7 - GIOVANNI -->
+    <div id="battle-screen-gym-7" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container gym-7">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-gym-7">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-gym-7">Pokemon</span> - Nível <span id="opponent-level-gym-7">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-gym-7" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-gym-7">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-gym-7" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-gym-7" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-gym-7">---</span> Lv.<span id="battle-player-level-gym-7">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-gym-7" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-gym-7">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-gym-7" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-gym-7">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-gym-7">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-7">
+          🧪 Usar Poção (<span id="battle-potion-count-gym-7">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-gym-7">Questões: 0/0</div>
+        <h3 id="battle-question-gym-7">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-gym-7"></div>
+      </div>
+    </div>
+
+    <!-- ELITE 0 - LORELEI -->
+    <div id="battle-screen-elite-0" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container elite-0">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-elite-0">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-elite-0">Pokemon</span> - Nível <span id="opponent-level-elite-0">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-elite-0" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-elite-0">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-elite-0" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-elite-0" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-elite-0">---</span> Lv.<span id="battle-player-level-elite-0">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-elite-0" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-elite-0">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-elite-0" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-elite-0">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-elite-0">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-0">
+          🧪 Usar Poção (<span id="battle-potion-count-elite-0">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-elite-0">Questões: 0/0</div>
+        <h3 id="battle-question-gym-elite-0">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-elite-0"></div>
+      </div>
+    </div>
+
+    <!-- ELITE 1 - BRUNO -->
+    <div id="battle-screen-elite-1" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container elite-1">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-elite-1">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-elite-1">Pokemon</span> - Nível <span id="opponent-level-elite-1">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-elite-1" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-elite-1">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-elite-1" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-elite-1" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-elite-1">---</span> Lv.<span id="battle-player-level-elite-1">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-elite-1" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-elite-1">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-elite-1" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-elite-1">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-elite-1">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-1">
+          🧪 Usar Poção (<span id="battle-potion-count-elite-1">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-elite-1">Questões: 0/0</div>
+        <h3 id="battle-question-elite-1">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-elite-1"></div>
+      </div>
+    </div>
+
+    <!-- ELITE 2 - AGATHA -->
+    <div id="battle-screen-elite-2" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container elite-2">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-elite-2">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-elite-2">Pokemon</span> - Nível <span id="opponent-level-elite-2">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-elite-2" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-elite-2">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-elite-2" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-elite-2" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-elite-2">---</span> Lv.<span id="battle-player-level-elite-2">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-elite-2" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-elite-2">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-elite-2" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-elite-2">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-elite-2">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-2">
+          🧪 Usar Poção (<span id="battle-potion-count-elite-2">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-elite-2">Questões: 0/0</div>
+        <h3 id="battle-question-elite-2">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-elite-2"></div>
+      </div>
+    </div>
+
+    <!-- ELITE 3 - LANCE -->
+    <div id="battle-screen-elite-3" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container elite-3">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-elite-3">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-elite-3">Pokemon</span> - Nível <span id="opponent-level-elite-3">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-elite-3" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-elite-3">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-elite-3" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-elite-3" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-elite-3">---</span> Lv.<span id="battle-player-level-elite-3">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-elite-3" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-elite-3">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-elite-3" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-elite-3">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-elite-3">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-3">
+          🧪 Usar Poção (<span id="battle-potion-count-elite-3">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-elite-3">Questões: 0/0</div>
+        <h3 id="battle-question-elite-3">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-elite-3"></div>
+      </div>
+    </div>
+
+    <!-- ELITE 4 - ASH (CAMPEÃO) -->
+    <div id="battle-screen-elite-4" class="screen">
+      <h1>⚔️ BATALHA POKEMON ⚔️</h1>
+      
+      <div class="battle-pokemon-container elite-4">
+        <div class="battle-area">
+          <div class="opponent-info">
+            <p><strong id="opponent-name-elite-4">Pokemon</strong></p>
+            <p><span id="opponent-pokemon-name-elite-4">Pokemon</span> - Nível <span id="opponent-level-elite-4">5</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="opponent-hp-bar-elite-4" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="opponent-hp-display-elite-4">30/30</span></p>
+          </div>
+
+          <div class="pokemon-sprite player-sprite">
+            <img id="battle-player-sprite-elite-4" src="" alt="Seu Pokemon">
+          </div>
+          <div class="pokemon-sprite opponent-sprite">
+            <img id="battle-opponent-sprite-elite-4" src="" alt="Pokemon">
+          </div>
+
+          <div class="battle-player-info">
+            <p><span id="battle-player-name-elite-4">---</span> Lv.<span id="battle-player-level-elite-4">1</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill" id="battle-hp-bar-elite-4" style="width: 100%"></div>
+            </div>
+            <p>HP: <span id="battle-hp-display-elite-4">15/15</span></p>
+            <div class="battle-stat-bar">
+              <div class="stat-fill exp-fill" id="battle-exp-bar-elite-4" style="width: 0%"></div>
+            </div>
+            <p>EXP: <span id="battle-exp-display-elite-4">0/50</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-box" id="battle-message-elite-4">
+        Responda corretamente para atacar o pokemon do líder do ginásio!
+      </div>
+
+      <div class="potion-container">
+        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-4">
+          🧪 Usar Poção (<span id="battle-potion-count-elite-4">0</span>)
+        </button>
+      </div>
+
+      <div class="question-box">
+        <div class="question-counter" id="battle-counter-elite-4">Questões: 0/0</div>
+        <h3 id="battle-question-elite-4">Carregando questão...</h3>
+        <div class="answers" id="battle-answers-elite-4"></div>
       </div>
     </div>
 
@@ -1297,6 +1999,8 @@
       questionsAnswered: 0,
       pendingEvolution: null
     };
+
+    let currentBattleSuffix = '';
 
     // Variáveis do mini-game
     let minigameActive = false;
@@ -28668,22 +29372,24 @@ GABARITO: A
     }
 
     function startBattle(gym) {
-      document.getElementById('battle-potion-btn').disabled = false;
+      currentBattleSuffix = '-gym-' + game.currentGym;  // ← ADICIONE ESTA LINHA
+      const suffix = currentBattleSuffix;
+      document.getElementById('battle-potion-btn' + suffix).disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
-      showScreen('battle-screen');
+      showScreen('battle-screen-gym-' + game.currentGym);
       audioSystem.play('gym-music');
       
       const playerData = pokemonData[game.player.pokemon];
-      document.getElementById('battle-player-sprite').src = playerData.sprite;
-      applyPokemonScaleInBattle(document.getElementById('battle-player-sprite'), game.player.pokemon, true);
-      document.getElementById('battle-player-name').textContent = playerData.name;
-      document.getElementById('battle-player-level').textContent = game.player.level;
-      document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
+      document.getElementById('battle-player-sprite' + suffix).src = playerData.sprite;
+      applyPokemonScaleInBattle(document.getElementById('battle-player-sprite' + suffix), game.player.pokemon, true);
+      document.getElementById('battle-player-name' + suffix).textContent = playerData.name;
+      document.getElementById('battle-player-level' + suffix).textContent = game.player.level;
+      document.getElementById('battle-hp-display' + suffix).textContent = `${game.player.hp}/${game.player.maxHp}`;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      const hpBar = document.getElementById('battle-hp-bar');
+      const hpBar = document.getElementById('battle-hp-bar' + suffix);
 
       if (hpPercent > 50) {
         hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
@@ -28694,19 +29400,19 @@ GABARITO: A
       }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
-      document.getElementById('battle-exp-bar').style.width = expPercent + '%';
-      document.getElementById('battle-exp-display').textContent = `${game.player.exp}/${game.player.expToNext}`;
+      document.getElementById('battle-exp-bar' + suffix).style.width = expPercent + '%';
+      document.getElementById('battle-exp-display' + suffix).textContent = `${game.player.exp}/${game.player.expToNext}`;
       
       const opponentPokemon = pokemonData[game.currentOpponent.name];
-      document.getElementById('opponent-name').textContent = `Líder ${gym.name}`;
-      document.getElementById('opponent-pokemon-name').textContent = opponentPokemon.name;
-      document.getElementById('opponent-level').textContent = game.currentOpponent.level;
-      document.getElementById('opponent-hp-display').textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
-      document.getElementById('battle-opponent-sprite').src = opponentPokemon.sprite;
-      applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
+      document.getElementById('opponent-name' + suffix).textContent = `Líder ${gym.name}`;
+      document.getElementById('opponent-pokemon-name' + suffix).textContent = opponentPokemon.name;
+      document.getElementById('opponent-level' + suffix).textContent = game.currentOpponent.level;
+      document.getElementById('opponent-hp-display' + suffix).textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
+      document.getElementById('battle-opponent-sprite' + suffix).src = opponentPokemon.sprite;
+      applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite' + suffix), game.currentOpponent.name, false);
       
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      const oppHpBar = document.getElementById('opponent-hp-bar');
+      const oppHpBar = document.getElementById('opponent-hp-bar' + suffix);
 
       if (oppHpPercent > 50) {
         oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
@@ -28716,31 +29422,33 @@ GABARITO: A
         oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
       }
       
-      document.getElementById('battle-message').innerHTML = `${gym.name} desafia você para uma batalha!`;
-      document.getElementById('battle-message').style.background = 'rgba(0, 0, 0, 0.9)';
+      document.getElementById('battle-message' + suffix).innerHTML = `${gym.name} desafia você para uma batalha!`;
+      document.getElementById('battle-message' + suffix).style.background = 'rgba(0, 0, 0, 0.9)';
       
       nextBattleQuestion();
 
-      document.getElementById('battle-potion-count').textContent = game.player.potions;
+      document.getElementById('battle-potion-count' + suffix).textContent = game.player.potions;
     }
 
     function startEliteBattle(elite) {
-      document.getElementById('battle-potion-btn').disabled = false;
+      currentBattleSuffix = '-elite-' + game.currentElite;  // ← ADICIONE ESTA LINHA
+      const suffix = currentBattleSuffix;
+      document.getElementById('battle-potion-btn' + suffix).disabled = false;
 
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
-      showScreen('battle-screen');
+      showScreen('battle-screen-elite-' + game.currentElite);
       audioSystem.play('elite-music');
       
       const playerData = pokemonData[game.player.pokemon];
-      document.getElementById('battle-player-sprite').src = playerData.sprite;
-      applyPokemonScaleInBattle(document.getElementById('battle-player-sprite'), game.player.pokemon, true);
-      document.getElementById('battle-player-name').textContent = playerData.name;
-      document.getElementById('battle-player-level').textContent = game.player.level;
-      document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
+      document.getElementById('battle-player-sprite' + suffix).src = playerData.sprite;
+      applyPokemonScaleInBattle(document.getElementById('battle-player-sprite' + suffix), game.player.pokemon, true);
+      document.getElementById('battle-player-name' + suffix).textContent = playerData.name;
+      document.getElementById('battle-player-level' + suffix).textContent = game.player.level;
+      document.getElementById('battle-hp-display' + suffix).textContent = `${game.player.hp}/${game.player.maxHp}`;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      const hpBar = document.getElementById('battle-hp-bar');
+      const hpBar = document.getElementById('battle-hp-bar' + suffix);
 
       if (hpPercent > 50) {
         hpBar.style.cssText = `width: ${hpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
@@ -28751,19 +29459,19 @@ GABARITO: A
       }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
-      document.getElementById('battle-exp-bar').style.width = expPercent + '%';
-      document.getElementById('battle-exp-display').textContent = `${game.player.exp}/${game.player.expToNext}`;
+      document.getElementById('battle-exp-bar' + suffix).style.width = expPercent + '%';
+      document.getElementById('battle-exp-display' + suffix).textContent = `${game.player.exp}/${game.player.expToNext}`;
       
       const opponentPokemon = pokemonData[game.currentOpponent.name];
-      document.getElementById('opponent-name').textContent = `${elite.name} - ${elite.title}`;
-      document.getElementById('opponent-pokemon-name').textContent = opponentPokemon.name;
-      document.getElementById('opponent-level').textContent = game.currentOpponent.level;
-      document.getElementById('opponent-hp-display').textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
-      document.getElementById('battle-opponent-sprite').src = opponentPokemon.sprite;
-      applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
+      document.getElementById('opponent-name' + suffix).textContent = `${elite.name} - ${elite.title}`;
+      document.getElementById('opponent-pokemon-name' + suffix).textContent = opponentPokemon.name;
+      document.getElementById('opponent-level' + suffix).textContent = game.currentOpponent.level;
+      document.getElementById('opponent-hp-display' + suffix).textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
+      document.getElementById('battle-opponent-sprite' + suffix).src = opponentPokemon.sprite;
+      applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite' + suffix), game.currentOpponent.name, false);
       
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      const oppHpBar = document.getElementById('opponent-hp-bar');
+      const oppHpBar = document.getElementById('opponent-hp-bar' + suffix);
 
       if (oppHpPercent > 50) {
         oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #00ff00, #00cc00);`;
@@ -28773,11 +29481,11 @@ GABARITO: A
         oppHpBar.style.cssText = `width: ${oppHpPercent}%; background: linear-gradient(to right, #ff0000, #cc0000);`;
       }
       
-      document.getElementById('battle-message').innerHTML = `${elite.name} desafia você!`;
+      document.getElementById('battle-message' + suffix).innerHTML = `${elite.name} desafia você!`;
       
       nextBattleQuestion();
 
-      document.getElementById('battle-potion-count').textContent = game.player.potions;
+      document.getElementById('battle-potion-count' + suffix).textContent = game.player.potions;
     }
 
     function nextBattleQuestion() {
@@ -28786,9 +29494,9 @@ GABARITO: A
       }
       
       updateQuestionCounter();
-      document.getElementById('battle-question').innerHTML = currentBattleQuestion.question;
+      document.getElementById('battle-question' + currentBattleSuffix).innerHTML = currentBattleQuestion.question;
       
-      const answersDiv = document.getElementById('battle-answers');
+      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
       answersDiv.innerHTML = '';
       currentBattleQuestion.allAnswers.forEach(ans => {
         const btn = document.createElement('button');
@@ -28799,11 +29507,11 @@ GABARITO: A
     }
 
     function checkBattleAnswer(selected, correct, questionIndex) {
-      document.getElementById('battle-potion-btn').disabled = true;
+      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
 
       saveGame();
       
-      const messageEl = document.getElementById('battle-message');
+      const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
       
       if (game.battleType === 'gym') {
         const gym = gyms[game.currentGym];
@@ -28815,10 +29523,10 @@ GABARITO: A
     }
 
     function handleBattleLogic(selected, correct, opponent, pokemonList, progressType, progressIndex, questionIndex) {
-      const messageEl = document.getElementById('battle-message');
+      const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
       
       if(selected === correct) {
-        const answersDiv = document.getElementById('battle-answers');
+        const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
         answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
         
         markQuestionAsAnswered(questionIndex);
@@ -28828,24 +29536,24 @@ GABARITO: A
         messageEl.innerHTML = `✅ CORRETO! ${pokemonData[game.player.pokemon].name} vai atacar e causar ${damage} de dano!<br><br><strong>Resposta: ${correct}</strong><br><br><button onclick="continueAfterCorrectBattle(${damage}, '${progressType}', ${progressIndex})" class="btn-secondary" style="margin-top: 10px;">Continuar</button>`;
         messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
 
-        document.getElementById('battle-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('battle-message' + currentBattleSuffix).scrollIntoView({ behavior: 'smooth', block: 'center' });
         
         saveGame();
         
       } else {
-        const answersDiv = document.getElementById('battle-answers');
+        const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
         answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
         
         messageEl.innerHTML = `❌ ERRADO! A resposta correta era:<br><br><strong>${correct}</strong><br><br><button onclick="continueAfterWrongBattle()" class="btn-primary" style="margin-top: 10px;">Continuar</button>`;
         messageEl.style.background = 'rgba(200, 0, 0, 0.9)';
 
-        document.getElementById('battle-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('battle-message' + currentBattleSuffix).scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
 
     function continueAfterWrongBattle() {
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
-      const answersDiv = document.getElementById('battle-answers');
+      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
       
       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
       
@@ -28856,8 +29564,8 @@ GABARITO: A
 
     function continueAfterCorrectBattle(damage, progressType, progressIndex) {
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
-      const messageEl = document.getElementById('battle-message');
-      const answersDiv = document.getElementById('battle-answers');
+      const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
+      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
       
       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
       
@@ -28936,7 +29644,7 @@ GABARITO: A
                 }
 
                 setTimeout(() => {
-                  applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite'), game.currentOpponent.name, false);
+                  applyPokemonScaleInBattle(document.getElementById('battle-opponent-sprite' + currentBattleSuffix), game.currentOpponent.name, false);
                 }, 100);
                 
               }, 3500);
@@ -29051,11 +29759,11 @@ GABARITO: A
     }
 
     function opponentAttack() {
-      
+  
       // ADICIONAR ESTAS LINHAS NO INÍCIO:
-      document.getElementById('battle-potion-btn').disabled = true;
+      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
 
-      const messageEl = document.getElementById('battle-message');
+      const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
       const damage = 5 + Math.floor(game.currentOpponent.level);
       game.player.hp = Math.max(0, game.player.hp - damage);
       currentBattleQuestion = null;
@@ -29085,7 +29793,7 @@ GABARITO: A
         messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
 
         // ADICIONAR ESTA LINHA ANTES DE nextBattleQuestion():
-        document.getElementById('battle-potion-btn').disabled = false;
+        document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
 
         nextBattleQuestion();
       }, 1500);
@@ -29093,8 +29801,8 @@ GABARITO: A
 
    function updateBattleDisplay() {
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
-      const hpBar = document.getElementById('battle-hp-bar');
-      document.getElementById('battle-hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
+      const hpBar = document.getElementById('battle-hp-bar' + currentBattleSuffix);
+      document.getElementById('battle-hp-display' + currentBattleSuffix).textContent = `${game.player.hp}/${game.player.maxHp}`;
       
       // Atualiza cor e largura da barra de HP do jogador
       if (hpPercent > 50) {
@@ -29106,8 +29814,8 @@ GABARITO: A
       }
       
       const oppHpPercent = (game.currentOpponent.hp / game.currentOpponent.maxHp) * 100;
-      const oppHpBar = document.getElementById('opponent-hp-bar');
-      document.getElementById('opponent-hp-display').textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
+      const oppHpBar = document.getElementById('opponent-hp-bar' + currentBattleSuffix);
+      document.getElementById('opponent-hp-display' + currentBattleSuffix).textContent = `${game.currentOpponent.hp}/${game.currentOpponent.maxHp}`;
       
       // Atualiza cor e largura da barra de HP do oponente
       if (oppHpPercent > 50) {
@@ -29119,8 +29827,8 @@ GABARITO: A
       }
       
       const expPercent = (game.player.exp / game.player.expToNext) * 100;
-      document.getElementById('battle-exp-bar').style.width = expPercent + '%';
-      document.getElementById('battle-exp-display').textContent = `${game.player.exp}/${game.player.expToNext}`;
+      document.getElementById('battle-exp-bar' + currentBattleSuffix).style.width = expPercent + '%';
+      document.getElementById('battle-exp-display' + currentBattleSuffix).textContent = `${game.player.exp}/${game.player.expToNext}`;
     }
 
     let audioUnlocked = false;
