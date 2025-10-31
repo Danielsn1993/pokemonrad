@@ -3778,11 +3778,7 @@ GABARITO: C
                 } else {
                   startEliteBattle(opponent);
                 }
-
-                // DESABILITA OS BOTÕES IMEDIATAMENTE APÓS CRIAR
-                const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
-                answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
-
+                
                 setTimeout(() => {
                   console.log('👻 Opacity = 0');
                   const opponentSprite = document.getElementById('battle-opponent-sprite' + currentBattleSuffix);
@@ -3796,8 +3792,7 @@ GABARITO: C
                     setTimeout(() => {
                       console.log('🔓 DESBLOQUEANDO BOTÕES');
                       document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
-                      
-                      // AGORA SIM HABILITA
+                      const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
                     }, 600);
                   }, 1000);
