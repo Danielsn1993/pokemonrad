@@ -2988,10 +2988,9 @@ GABARITO: C
     }
 
     function usePotion(battleType, suffix = '') {
+      // Corrigir o sufixo: se vier 'gym-0', deve virar '-gym-0'
       const idSuffix = suffix ? `-${suffix}` : '';
-      const potionCountEl = document.getElementById(`${battleType}-potion-count${idSuffix}`);
-      const messageBox = document.getElementById(`${battleType}-message${idSuffix}`);
-
+      
       if (game.player.potions <= 0) {
         alert('Você não tem poções!');
         return;
@@ -3012,13 +3011,23 @@ GABARITO: C
         document.getElementById('training-potion-count').textContent = game.player.potions;
       } else {
         updateBattleDisplay();
-          const potionCountEl = document.getElementById(`battle-potion-count${idSuffix}`);
-          if (potionCountEl) potionCountEl.textContent = game.player.potions;
+        // Corrigir: usar idSuffix que já inclui o hífen
+        const potionCountEl = document.getElementById(`battle-potion-count${idSuffix}`);
+        if (potionCountEl) potionCountEl.textContent = game.player.potions;
       }
       
       updatePlayerDisplay();
       
-      const messageEl = document.getElementById(battleType === 'training' ? 'training-message' : 'battle-message');
+      // Corrigir: buscar o elemento correto com o sufixo
+      const messageEl = document.getElementById(
+        battleType === 'training' ? 'training-message' : `battle-message${idSuffix}`
+      );
+      
+      if (!messageEl) {
+        console.error('Elemento de mensagem não encontrado:', `battle-message${idSuffix}`);
+        return;
+      }
+      
       const originalBg = messageEl.style.background;
       messageEl.innerHTML = '🧪 Você usou uma Poção! HP restaurado completamente!';
       messageEl.style.background = 'rgba(0, 150, 255, 0.9)';
@@ -3783,6 +3792,7 @@ GABARITO: C
                     setTimeout(() => {
                       console.log('🔓 DESBLOQUEANDO BOTÕES');
                       document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
+                      nextBattleQuestion();
                       const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
                       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = false);
                     }, 600);
