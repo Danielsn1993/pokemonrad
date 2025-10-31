@@ -1297,7 +1297,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-0">
+        <button onclick="usePotion('battle', 'gym-0')" id="battle-potion-btn-gym-0">
           🧪 Usar Poção (<span id="battle-potion-count-gym-0">0</span>)
         </button>
       </div>
@@ -1350,7 +1350,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-1">
+        <button onclick="usePotion('battle', 'gym-1')" id="battle-potion-btn-gym-1">
           🧪 Usar Poção (<span id="battle-potion-count-gym-1">0</span>)
         </button>
       </div>
@@ -1403,7 +1403,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-2">
+        <button onclick="usePotion('battle', 'gym-2')" id="battle-potion-btn-gym-2">
           🧪 Usar Poção (<span id="battle-potion-count-gym-2">0</span>)
         </button>
       </div>
@@ -1456,7 +1456,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-3">
+        <button onclick="usePotion('battle', 'gym-3')" id="battle-potion-btn-gym-3">
           🧪 Usar Poção (<span id="battle-potion-count-gym-3">0</span>)
         </button>
       </div>
@@ -1509,7 +1509,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-4">
+        <button onclick="usePotion('battle', 'gym-4')" id="battle-potion-btn-gym-4">
           🧪 Usar Poção (<span id="battle-potion-count-gym-4">0</span>)
         </button>
       </div>
@@ -1562,7 +1562,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-5">
+        <button onclick="usePotion('battle', 'gym-5')" id="battle-potion-btn-gym-5">
           🧪 Usar Poção (<span id="battle-potion-count-gym-5">0</span>)
         </button>
       </div>
@@ -1615,7 +1615,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-6">
+        <button onclick="usePotion('battle', 'gym-6')" id="battle-potion-btn-gym-6">
           🧪 Usar Poção (<span id="battle-potion-count-gym-6">0</span>)
         </button>
       </div>
@@ -1668,7 +1668,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-gym-7">
+        <button onclick="usePotion('battle', 'gym-7')" id="battle-potion-btn-gym-7">
           🧪 Usar Poção (<span id="battle-potion-count-gym-7">0</span>)
         </button>
       </div>
@@ -1721,7 +1721,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-0">
+        <button onclick="usePotion('battle', 'elite-0')" id="battle-potion-btn-elite-0">
           🧪 Usar Poção (<span id="battle-potion-count-elite-0">0</span>)
         </button>
       </div>
@@ -1774,7 +1774,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-1">
+        <button onclick="usePotion('battle', 'elite-1')" id="battle-potion-btn-elite-1">
           🧪 Usar Poção (<span id="battle-potion-count-elite-1">0</span>)
         </button>
       </div>
@@ -1827,7 +1827,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-2">
+        <button onclick="usePotion('battle', 'elite-2')" id="battle-potion-btn-elite-2">
           🧪 Usar Poção (<span id="battle-potion-count-elite-2">0</span>)
         </button>
       </div>
@@ -1880,7 +1880,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-3">
+        <button onclick="usePotion('battle', 'elite-3')" id="battle-potion-btn-elite-3">
           🧪 Usar Poção (<span id="battle-potion-count-elite-3">0</span>)
         </button>
       </div>
@@ -1933,7 +1933,7 @@
       </div>
 
       <div class="potion-container">
-        <button onclick="usePotion('battle')" id="battle-potion-btn-elite-4">
+        <button onclick="usePotion('battle', 'elite-4')" id="battle-potion-btn-elite-4">
           🧪 Usar Poção (<span id="battle-potion-count-elite-4">0</span>)
         </button>
       </div>
@@ -2987,7 +2987,11 @@ GABARITO: C
       document.getElementById('minigame-result').classList.remove('show');
     }
 
-    function usePotion(battleType) {
+    function usePotion(battleType, suffix = '') {
+      const idSuffix = suffix ? `-${suffix}` : '';
+      const potionCountEl = document.getElementById(`${battleType}-potion-count${idSuffix}`);
+      const messageBox = document.getElementById(`${battleType}-message${idSuffix}`);
+
       if (game.player.potions <= 0) {
         alert('Você não tem poções!');
         return;
@@ -3008,7 +3012,8 @@ GABARITO: C
         document.getElementById('training-potion-count').textContent = game.player.potions;
       } else {
         updateBattleDisplay();
-        document.getElementById('battle-potion-count').textContent = game.player.potions;
+          const potionCountEl = document.getElementById(`battle-potion-count${idSuffix}`);
+          if (potionCountEl) potionCountEl.textContent = game.player.potions;
       }
       
       updatePlayerDisplay();
