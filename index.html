@@ -1020,12 +1020,87 @@
       margin-top: 10px;
     }
 
+    .explanation-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .explanation-modal.active {
+      display: flex;
+    }
+
+    .explanation-content {
+      background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+      border: 5px solid #ffcc00;
+      border-radius: 10px;
+      width: 75vw;
+      height: 75vh;
+      max-width: 75vw;
+      max-height: 75vh;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+      color: #fff;
+    }
+
+    .close-explanation {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #cc0000;
+      color: #fff;
+      border: 2px solid #000;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .close-explanation:active {
+      background: #ff0000;
+      transform: scale(1.1);
+    }
+
+    .explanation-content h2 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    #explanation-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
   <div id="image-preview" class="image-preview">
     <div class="close-preview" onclick="hideImagePreview()">✕</div>
     <img id="preview-img" src="" alt="Preview">
+  </div>
+
+  <div id="explanation-modal" class="explanation-modal" onclick="closeExplanationModal()">
+    <div class="explanation-content" onclick="event.stopPropagation()">
+      <div class="close-explanation" onclick="closeExplanationModal()">✕</div>
+      <h2>📖 EXPLICAÇÃO</h2>
+      <div id="explanation-text"></div>
+    </div>
   </div>
 
   <div id="battle-result-overlay" class="battle-result-overlay">
@@ -27991,8 +28066,11 @@ GABARITO: A
         let questionText = '';
         let options = [];
         let correctAnswer = '';
+        let explanation = '';
         let hasImage = false;
         const questionNumber = matches[index] ? parseInt(matches[index][1]) : index + 1;
+        
+        let isReadingExplanation = false;
         
         lines.forEach(line => {
           line = line.trim();
@@ -28002,13 +28080,29 @@ GABARITO: A
             return;
           }
           
+          if (line.toUpperCase().startsWith('EXPLICAÇÃO:')) {
+            isReadingExplanation = true;
+            explanation = line.substring(line.indexOf(':') + 1).trim();
+            return;
+          }
+          
+          if (isReadingExplanation && !line.toUpperCase().startsWith('GABARITO:')) {
+            explanation += (explanation ? ' ' : '') + line;
+            return;
+          }
+          
           if (line.startsWith('A)')) options[0] = line.substring(2).trim();
           else if (line.startsWith('B)')) options[1] = line.substring(2).trim();
           else if (line.startsWith('C)')) options[2] = line.substring(2).trim();
           else if (line.startsWith('D)')) options[3] = line.substring(2).trim();
           else if (line.startsWith('E)')) options[4] = line.substring(2).trim();
-          else if (line.toUpperCase().startsWith('GABARITO:')) correctAnswer = line.split(':')[1].trim().toUpperCase();
-          else if (!line.startsWith('QUESTÃO') && options.length === 0) questionText += (questionText ? ' ' : '') + line;
+          else if (line.toUpperCase().startsWith('GABARITO:')) {
+            correctAnswer = line.split(':')[1].trim().toUpperCase();
+            isReadingExplanation = false;
+          }
+          else if (!line.startsWith('QUESTÃO') && options.length === 0 && !isReadingExplanation) {
+            questionText += (questionText ? ' ' : '') + line;
+          }
         });
         
         if (hasImage) {
@@ -28021,7 +28115,8 @@ GABARITO: A
             text: questionText,
             options: options,
             correctIndex: correctIndex,
-            correctAnswer: options[correctIndex]
+            correctAnswer: options[correctIndex],
+            explanation: explanation // Adiciona a explicação ao objeto da questão
           });
         }
       });
@@ -28093,7 +28188,8 @@ GABARITO: A
         question: selectedQuestion.text,
         answer: correctAnswer,
         allAnswers: shuffledOptions,
-        index: randomIndex
+        index: randomIndex,
+        explanation: selectedQuestion.explanation
       };
     }
 
@@ -29164,10 +29260,24 @@ GABARITO: A
         updateQuestionCounter();
         
         const damage = 8 + Math.floor(game.player.level * 1.2);
-        messageEl.innerHTML = `✅ CORRETO! ${pokemonData[game.player.pokemon].name} vai atacar e causar ${damage} de dano!<br><br><strong>Resposta: ${correct}</strong><br><br><button onclick="continueAfterCorrectTraining(${damage})" class="btn-secondary" style="margin-top: 10px;">Continuar</button>`;
+        // Primeiro, cria uma variável que verifica se tem explicação
+        const explanationBtn = currentTrainingQuestion.explanation && currentTrainingQuestion.explanation.trim() !== '' 
+          ? `<button onclick="showExplanation(\`${currentTrainingQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
+          : '';
+
+        // Depois, usa essa variável no innerHTML
+        messageEl.innerHTML = `✅ CORRETO! ${pokemonData[game.player.pokemon].name} vai atacar e causar ${damage} de dano!<br><br><strong>Resposta: ${correct}</strong><br><br>
+        <button onclick="continueAfterCorrectTraining(${damage})" class="btn-secondary" style="margin-top: 10px;">Continuar</button>${explanationBtn}`;
         messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
       } else {
-        messageEl.innerHTML = `❌ ERRADO! A resposta correta era:<br><br><strong>${correct}</strong><br><br><button onclick="continueAfterWrongTraining()" class="btn-primary" style="margin-top: 10px;">Continuar</button>`;
+        // Primeiro, cria a variável de verificação
+        const explanationBtn = currentTrainingQuestion.explanation && currentTrainingQuestion.explanation.trim() !== '' 
+          ? `<button onclick="showExplanation(\`${currentTrainingQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
+          : '';
+
+        // Depois, usa no innerHTML
+        messageEl.innerHTML = `❌ ERRADO! A resposta correta era:<br><br><strong>${correct}</strong><br><br>
+        <button onclick="continueAfterWrongTraining()" class="btn-primary" style="margin-top: 10px;">Continuar</button>${explanationBtn}`;
         messageEl.style.background = 'rgba(200, 0, 0, 0.9)';
       }
 
@@ -29556,7 +29666,12 @@ GABARITO: A
         updateQuestionCounter();
         
         const damage = 10 + Math.floor(game.player.level * 1.5);
-        messageEl.innerHTML = `✅ CORRETO! ${pokemonData[game.player.pokemon].name} vai atacar e causar ${damage} de dano!<br><br><strong>Resposta: ${correct}</strong><br><br><button onclick="continueAfterCorrectBattle(${damage}, '${progressType}', ${progressIndex})" class="btn-secondary" style="margin-top: 10px;">Continuar</button>`;
+        const explanationBtn = currentBattleQuestion.explanation && currentBattleQuestion.explanation.trim() !== '' 
+          ? `<button onclick="showExplanation(\`${currentBattleQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
+          : '';
+
+        messageEl.innerHTML = `✅ CORRETO! ${pokemonData[game.player.pokemon].name} vai atacar e causar ${damage} de dano!<br><br><strong>Resposta: ${correct}</strong><br><br>
+        <button onclick="continueAfterCorrectBattle(${damage}, '${progressType}', ${progressIndex})" class="btn-secondary" style="margin-top: 10px;">Continuar</button>${explanationBtn}`;
         messageEl.style.background = 'rgba(0, 200, 0, 0.9)';
 
         document.getElementById('battle-message' + currentBattleSuffix).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -29567,7 +29682,12 @@ GABARITO: A
         const answersDiv = document.getElementById('battle-answers' + currentBattleSuffix);
         answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
         
-        messageEl.innerHTML = `❌ ERRADO! A resposta correta era:<br><br><strong>${correct}</strong><br><br><button onclick="continueAfterWrongBattle()" class="btn-primary" style="margin-top: 10px;">Continuar</button>`;
+        const explanationBtn = currentBattleQuestion.explanation && currentBattleQuestion.explanation.trim() !== '' 
+          ? `<button onclick="showExplanation(\`${currentBattleQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
+          : '';
+
+        messageEl.innerHTML = `❌ ERRADO! A resposta correta era:<br><br><strong>${correct}</strong><br><br>
+        <button onclick="continueAfterWrongBattle()" class="btn-primary" style="margin-top: 10px;">Continuar</button>${explanationBtn}`;
         messageEl.style.background = 'rgba(200, 0, 0, 0.9)';
 
         document.getElementById('battle-message' + currentBattleSuffix).scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -29797,6 +29917,20 @@ GABARITO: A
         
         setTimeout(() => opponentAttack(), 1500);
       }, 300);
+    }
+
+    function showExplanation(explanation) {
+      if (!explanation || explanation.trim() === '') {
+        alert('Não há explicação disponível para esta questão.');
+        return;
+      }
+      
+      document.getElementById('explanation-text').innerHTML = explanation;
+      document.getElementById('explanation-modal').classList.add('active');
+    }
+
+    function closeExplanationModal() {
+      document.getElementById('explanation-modal').classList.remove('active');
     }
 
     function opponentAttack() {
