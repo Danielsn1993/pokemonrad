@@ -17165,7 +17165,7 @@ E) Eurofibromatose tipo II.
 GABARITO: A
 QUESTÃO 1500
 
-Paciente com história de traumatismo encefálico leve e cefaleia foi submetido a um exame de tomografia computadorizada que não demonstrou alterações. Devido à persistência dos sintomas, foi solicitada um exame de ressonância magnética do encéfalo. O exame demonstrou tênue área de hiperssinal em FLAIR, com baixo sinal em gradiente-eco (T2") e realce tênue pelo gadolinio na base da ponte, sem sinais de edema vasogênico. Com essas informações, o diagnóstico mais provável é:
+Paciente com história de traumatismo encefálico leve e cefaleia foi submetido a um exame de tomografia computadorizada que não demonstrou alterações. Devido à persistência dos sintomas, foi solicitada um exame de ressonância magnética do encéfalo. O exame demonstrou tênue área de hiperssinal em FLAIR, com baixo sinal em gradiente-eco (T2*) e realce tênue pelo gadolinio na base da ponte, sem sinais de edema vasogênico. Com essas informações, o diagnóstico mais provável é:
 
 A) Fístula dural.
 B) Malformação arteriovenosa.
@@ -30067,6 +30067,7 @@ GABARITO: A
     function exportSave() {
       const saveData = localStorage.getItem('pokemonYellowSave');
       const usedQuestions = localStorage.getItem('pokemonYellowUsedQuestions');
+      const trophies = localStorage.getItem('pokemonTrophies');  // ← LINHA NOVA
       
       if (!saveData) {
         alert('Nenhum progresso para exportar!');
@@ -30075,7 +30076,8 @@ GABARITO: A
       
       const exportData = {
         save: saveData,
-        questions: usedQuestions
+        questions: usedQuestions,
+        trophies: trophies  // ← LINHA NOVA
       };
       
       const dataStr = JSON.stringify(exportData, null, 2);
@@ -30114,6 +30116,10 @@ GABARITO: A
           
           if (importData.questions) {
             localStorage.setItem('pokemonYellowUsedQuestions', importData.questions);
+          }
+          
+          if (importData.trophies) {  // ← BLOCO NOVO
+            localStorage.setItem('pokemonTrophies', importData.trophies);
           }
           
           alert('Save importado com sucesso! A página será recarregada.');
