@@ -1173,6 +1173,7 @@
       <h1>🗺️ MAPA DE KANTO 🗺️</h1>
       
       <div class="player-info">
+        <h2>🏆 Troféus: <span id="trophy-count">0</span></h2>
         <h2>🧪 Poções: <span id="potion-count">0</span></h2>
         <div class="pokemon-display">
           <img id="player-sprite" src="" alt="Seu Pokemon">
@@ -2063,7 +2064,8 @@
         hp: 15,
         badges: [],
         eliteDefeated: [],
-        potions: 0
+        potions: 0,
+        trophies: 0
       },
       currentGym: null,
       currentElite: null,
@@ -2397,6 +2399,18 @@ GABARITO: C
       }
     }
 
+    function saveTrophies() {
+      localStorage.setItem('pokemonTrophies', JSON.stringify({ trophies: game.player.trophies }));
+    }
+
+    function loadTrophies() {
+      const trophyData = localStorage.getItem('pokemonTrophies');
+      if (trophyData) {
+        const data = JSON.parse(trophyData);
+        game.player.trophies = data.trophies || 0;
+      }
+    }
+
     function resetGame() {
       if (confirm('Tem certeza que deseja resetar todo o progresso?')) {
         localStorage.removeItem('pokemonYellowSave');
@@ -2531,6 +2545,7 @@ GABARITO: C
 
     window.addEventListener('DOMContentLoaded', () => {
       loadUsedQuestions();
+      loadTrophies();
       if (loadGame()) {
         if (game.inBattle) {
           if (game.battleType === 'training' && game.trainingOpponent) {
@@ -3164,6 +3179,7 @@ GABARITO: C
       document.getElementById('hp-display').textContent = `${game.player.hp}/${game.player.maxHp}`;
       document.getElementById('exp-display').textContent = `${game.player.exp}/${game.player.expToNext}`;
       document.getElementById('potion-count').textContent = game.player.potions;
+      document.getElementById('trophy-count').textContent = game.player.trophies;
       
       const hpPercent = (game.player.hp / game.player.maxHp) * 100;
       const hpBar = document.getElementById('hp-bar');
@@ -3996,6 +4012,8 @@ GABARITO: C
                 currentBattleQuestion = null;
                 
                 if (progressType === 'eliteDefeated' && progressIndex === 4) {
+                  game.player.trophies++;
+                  saveTrophies();
                   showScreen('victory-screen');
                   audioSystem.stopAll();
                 } else {
