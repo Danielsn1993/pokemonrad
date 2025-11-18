@@ -30109,12 +30109,8 @@ GABARITO: A
     }
 
     function calculatePokemonHP(level, type) {
-      let increment;
-      if (type === 'player') increment = 5;
-      else if (type === 'gym') increment = 7;
-      else if (type === 'elite') increment = 10;
-      else if (type === 'ash') increment = 15;
-      
+      // Todos usam o mesmo cálculo do jogador
+      let increment = 15;
       return 15 + ((level - 1) * increment);
     }
 
@@ -30132,8 +30128,8 @@ GABARITO: A
       game.trainingOpponent = {
         name: randomPokemon,
         level: level,
-        maxHp: 20 + (level * 3),
-        hp: 20 + (level * 3)
+        maxHp: 15 + ((level - 1) * 15),
+        hp: 15 + ((level - 1) * 15)
       };
 
       game.inBattle = true;
