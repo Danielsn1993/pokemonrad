@@ -30221,9 +30221,22 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        const baseDamage = 6 + Math.floor(game.player.level * 1.1);
-        const randomFactor = 0.85 + (Math.random() * 0.2); // 85% a 105%
-        const damage = Math.floor(baseDamage * randomFactor);
+        // Verifica diferença de nível
+        const levelDiff = game.player.level - game.trainingOpponent.level;
+
+        let minPercent, maxPercent;
+        if (levelDiff >= 5) {
+          // Jogador muito mais forte: 37-42%
+          minPercent = 0.37;
+          maxPercent = 0.42;
+        } else {
+          // Dano normal do jogador no treino: 30-35%
+          minPercent = 0.30;
+          maxPercent = 0.35;
+        }
+
+        const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
+        const damage = Math.floor(game.trainingOpponent.maxHp * percentage);
         // Primeiro, cria uma variável que verifica se tem explicação
         const explanationBtn = currentTrainingQuestion.explanation && currentTrainingQuestion.explanation.trim() !== '' 
           ? `<button onclick="showExplanation(\`${currentTrainingQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
@@ -30339,15 +30352,20 @@ GABARITO: A
       const messageEl = document.getElementById('training-message');
 
       const levelDiff = game.trainingOpponent.level - game.player.level;
-      let damage;
+
+      let minPercent, maxPercent;
       if (levelDiff >= 5) {
-        const percentage = 0.35 + (Math.random() * 0.05); // 35% a 40%
-        damage = Math.floor(game.player.maxHp * percentage);
+        // Selvagem muito mais forte: 37-42%
+        minPercent = 0.37;
+        maxPercent = 0.42;
       } else {
-        const baseDamage = Math.floor(game.trainingOpponent.level * 1.2) + Math.max(0, levelDiff * 3);
-        const randomFactor = 0.85 + (Math.random() * 0.2); // 85% a 105%
-        damage = Math.floor(baseDamage * randomFactor);
+        // Dano normal do selvagem no treino: 27-32%
+        minPercent = 0.27;
+        maxPercent = 0.32;
       }
+
+      const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
+      const damage = Math.floor(game.player.maxHp * percentage);
 
       game.player.hp = Math.max(0, game.player.hp - damage);
       
@@ -30640,9 +30658,22 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        const baseDamage = 5 + Math.floor(game.player.level * 0.9);
-        const randomFactor = 0.85 + (Math.random() * 0.3); // 85% a 115%
-        const damage = Math.floor(baseDamage * randomFactor);
+        // Verifica diferença de nível
+        const levelDiff = game.player.level - game.currentOpponent.level;
+
+        let minPercent, maxPercent;
+        if (levelDiff >= 5) {
+          // Jogador muito mais forte: 37-42%
+          minPercent = 0.37;
+          maxPercent = 0.42;
+        } else {
+          // Dano normal do jogador na batalha: 27-32%
+          minPercent = 0.27;
+          maxPercent = 0.32;
+        }
+
+        const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
+        const damage = Math.floor(game.currentOpponent.maxHp * percentage);
         const explanationBtn = currentBattleQuestion.explanation && currentBattleQuestion.explanation.trim() !== '' 
           ? `<button onclick="showExplanation(\`${currentBattleQuestion.explanation.replace(/`/g, '\\`').replace(/"/g, '&quot;')}\`)" class="btn-secondary" style="margin-top: 10px; margin-left: 10px;">📖 Explicação</button>` 
           : '';
@@ -30920,15 +30951,20 @@ GABARITO: A
       const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
 
       const levelDiff = game.currentOpponent.level - game.player.level;
-      let damage;
+
+      let minPercent, maxPercent;
       if (levelDiff >= 5) {
-        const percentage = 0.35 + (Math.random() * 0.05); // 35% a 40%
-        damage = Math.floor(game.player.maxHp * percentage);
+        // Adversário muito mais forte: 37-42%
+        minPercent = 0.37;
+        maxPercent = 0.42;
       } else {
-        const baseDamage = Math.floor(game.currentOpponent.level * 1.2) + Math.max(0, levelDiff * 3);
-        const randomFactor = 0.85 + (Math.random() * 0.2); // 85% a 105%
-        damage = Math.floor(baseDamage * randomFactor);
+        // Dano normal do adversário na batalha: 30-35%
+        minPercent = 0.30;
+        maxPercent = 0.35;
       }
+
+      const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
+      const damage = Math.floor(game.player.maxHp * percentage);
 
       game.player.hp = Math.max(0, game.player.hp - damage);
       currentBattleQuestion = null;
