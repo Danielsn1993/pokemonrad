@@ -30225,7 +30225,7 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        const baseDamage = 10 + Math.floor(game.player.level * 1.5);
+        const baseDamage = 6 + Math.floor(game.player.level * 1.1);
         const randomFactor = 0.85 + (Math.random() * 0.2); // 85% a 105%
         const damage = Math.floor(baseDamage * randomFactor);
         // Primeiro, cria uma variável que verifica se tem explicação
@@ -30644,7 +30644,7 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        const baseDamage = 8 + Math.floor(game.player.level * 1.2);
+        const baseDamage = 5 + Math.floor(game.player.level * 0.9);
         const randomFactor = 0.85 + (Math.random() * 0.3); // 85% a 115%
         const damage = Math.floor(baseDamage * randomFactor);
         const explanationBtn = currentBattleQuestion.explanation && currentBattleQuestion.explanation.trim() !== '' 
