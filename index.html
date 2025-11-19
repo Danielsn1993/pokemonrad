@@ -2086,6 +2086,36 @@
     let minigameTotalBalls = 50;
     let minigameBasketPosition = 50;
 
+    /**
+     * Calcula a porcentagem de dano baseada na diferença de nível
+     * @param {number} attackerLevel - Nível do atacante
+     * @param {number} defenderLevel - Nível do defensor
+     * @returns {object} - {min: porcentagem mínima, max: porcentagem máxima}
+     */
+    function calculateDamagePercent(attackerLevel, defenderLevel) {
+      const BASE = 0.27;           // 27% de dano base
+      const VARIANCE = 0.01;        // ±1% para fator sorte
+      const BONUS_PER_LEVEL = 0.01; // 1% por nível de diferença
+      const MIN_DAMAGE = 0.10;      // Limitador mínimo: 10%
+      const MAX_DAMAGE = 0.80;      // Limitador máximo: 80%
+      
+      // Calcula diferença de nível (pode ser positivo ou negativo)
+      const levelDiff = attackerLevel - defenderLevel;
+      
+      // Calcula o bônus/penalidade
+      const bonus = levelDiff * BONUS_PER_LEVEL;
+      
+      // Aplica o bônus aos valores base
+      let minPercent = BASE - VARIANCE + bonus;
+      let maxPercent = BASE + VARIANCE + bonus;
+      
+      // Aplica os limitadores
+      minPercent = Math.max(MIN_DAMAGE, Math.min(MAX_DAMAGE, minPercent));
+      maxPercent = Math.max(MIN_DAMAGE + 0.02, Math.min(MAX_DAMAGE + 0.02, maxPercent));
+      
+      return { min: minPercent, max: maxPercent };
+    }
+
     const audioSystem = {
       currentAudio: null,
       fadeInDuration: 2000,
@@ -30221,19 +30251,11 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        // Verifica diferença de nível
-        const levelDiff = game.player.level - game.trainingOpponent.level;
-
-        let minPercent, maxPercent;
-        if (levelDiff >= 5) {
-          // Jogador muito mais forte: 37-42%
-          minPercent = 0.37;
-          maxPercent = 0.42;
-        } else {
-          // Dano normal do jogador no treino: 30-35%
-          minPercent = 0.30;
-          maxPercent = 0.35;
-        }
+        // Calcula dano com base na diferença de nível
+        const { min: minPercent, max: maxPercent } = calculateDamagePercent(
+          game.player.level,           // atacante
+          game.trainingOpponent.level  // defensor
+        );
 
         const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
         const damage = Math.floor(game.trainingOpponent.maxHp * percentage);
@@ -30351,18 +30373,11 @@ GABARITO: A
 
       const messageEl = document.getElementById('training-message');
 
-      const levelDiff = game.trainingOpponent.level - game.player.level;
-
-      let minPercent, maxPercent;
-      if (levelDiff >= 5) {
-        // Selvagem muito mais forte: 37-42%
-        minPercent = 0.37;
-        maxPercent = 0.42;
-      } else {
-        // Dano normal do selvagem no treino: 27-32%
-        minPercent = 0.27;
-        maxPercent = 0.32;
-      }
+      // Calcula dano com base na diferença de nível
+      const { min: minPercent, max: maxPercent } = calculateDamagePercent(
+        game.trainingOpponent.level, // atacante
+        game.player.level             // defensor
+      );
 
       const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
       const damage = Math.floor(game.player.maxHp * percentage);
@@ -30658,19 +30673,11 @@ GABARITO: A
         markQuestionAsAnswered(questionIndex);
         updateQuestionCounter();
         
-        // Verifica diferença de nível
-        const levelDiff = game.player.level - game.currentOpponent.level;
-
-        let minPercent, maxPercent;
-        if (levelDiff >= 5) {
-          // Jogador muito mais forte: 37-42%
-          minPercent = 0.37;
-          maxPercent = 0.42;
-        } else {
-          // Dano normal do jogador na batalha: 27-32%
-          minPercent = 0.27;
-          maxPercent = 0.32;
-        }
+        // Calcula dano com base na diferença de nível
+        const { min: minPercent, max: maxPercent } = calculateDamagePercent(
+          game.player.level,          // atacante
+          game.currentOpponent.level  // defensor
+        );
 
         const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
         const damage = Math.floor(game.currentOpponent.maxHp * percentage);
@@ -30950,18 +30957,11 @@ GABARITO: A
 
       const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
 
-      const levelDiff = game.currentOpponent.level - game.player.level;
-
-      let minPercent, maxPercent;
-      if (levelDiff >= 5) {
-        // Adversário muito mais forte: 37-42%
-        minPercent = 0.37;
-        maxPercent = 0.42;
-      } else {
-        // Dano normal do adversário na batalha: 30-35%
-        minPercent = 0.30;
-        maxPercent = 0.35;
-      }
+      // Calcula dano com base na diferença de nível
+      const { min: minPercent, max: maxPercent } = calculateDamagePercent(
+        game.currentOpponent.level, // atacante
+        game.player.level            // defensor
+      );
 
       const percentage = minPercent + (Math.random() * (maxPercent - minPercent));
       const damage = Math.floor(game.player.maxHp * percentage);
