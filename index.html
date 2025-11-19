@@ -30128,8 +30128,8 @@ GABARITO: A
       game.trainingOpponent = {
         name: randomPokemon,
         level: level,
-        maxHp: 15 + ((level - 1) * 15),
-        hp: 15 + ((level - 1) * 15)
+        maxHp: calculatePokemonHP(level, 'training'),  // ← NOVA LINHA
+        hp: calculatePokemonHP(level, 'training')       // ← NOVA LINHA
       };
 
       game.inBattle = true;
