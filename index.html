@@ -2037,7 +2037,7 @@
       <div class="minigame-timer">
         ITENS TOTAIS: <span id="minigame-time">50</span>
       </div>
-      <div class="minigame-score">Poções capturadas: <span id="minigame-caught">0</span>/35</div>
+      <div class="minigame-score">Poções: <span id="minigame-caught">0</span>/35</div>
     </div>
     
     <div class="minigame-area" id="minigame-area">
@@ -30080,7 +30080,7 @@ GABARITO: A
       
       resultDiv.classList.add('show');
       
-      if (minigameCaught >= 30) {
+      if (minigameCaught >= 35) {
         // Sucesso! Cura o Pokémon
         resultTitle.textContent = '🎉 SUCESSO! 🎉';
         resultMessage.textContent = `Você capturou ${minigameCaught} poções!\nVocê ganhou 1 Poção para usar em batalhas!`;
