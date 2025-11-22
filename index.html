@@ -1172,7 +1172,7 @@
       
       <div class="player-info">
         <h2>🏆 Troféus: <span id="trophy-count">0</span></h2>
-        <h2>🧪 Poções: <span id="potion-count">0</span></h2>
+        <h2>🧪 Poções: <span id="potion-count">0</span>/2</h2>
         <div class="pokemon-display">
           <img id="player-sprite" src="" alt="Seu Pokemon">
           <div class="stats">
@@ -2085,6 +2085,7 @@
     let minigameCaught = 0;
     let minigameTotalBalls = 50;
     let minigameBasketPosition = 50;
+    const MAX_POTIONS = 2;
 
     /**
      * Calcula a porcentagem de dano baseada na diferença de nível
@@ -20130,7 +20131,7 @@ Em relação à avaliação por imagem das neoplasias da vesícula biliar, assin
 
 A) A apresentação mais comum do adenocarcinoma de vesícula biliar é de uma lesão polipoide intraluminal irregular com mais de 1,5 cm. 
 B) O acometimento da vesícula biliar por neoplasias malignas é incomum e na maioria das vezes acontece como envolvimento metastático de outras neoplasias. 
-C) Apesar de a colecistite crônica ser um fator de risco para o carcinoma de vesícula biliar, não há uma clara associação da neoplasia com a presença de cálculos na vesícula biliar. 
+C) Apesar da colecistite crônica ser um fator de risco para o carcinoma de vesícula biliar, não há uma clara associação da neoplasia com a presença de cálculos na vesícula biliar. 
 D) A tomografia computadorizada possui papel limitado na avaliação do carcinoma de vesícula biliar, sendo necessária a realização de ressonância magnética para avaliação e estadiamento adequados. 
 E) A apresentação mais comum do adenocarcinoma de vesícula biliar é de uma lesão expansiva que surge da parede ou substitui completamente a loja da vesícula, frequentemente com invasão do parênquima hepático.
 GABARITO: E
@@ -29827,7 +29828,13 @@ GABARITO: A
     }
 
     function healPokemon() {
-      // Inicia o mini-game ao invés de curar diretamente
+      // Verifica se já tem o máximo de poções
+      if (game.player.potions >= MAX_POTIONS) {
+        alert('❌ Seu inventário de poções está cheio! (Máximo: 2 poções)\n\nUse uma poção em batalha para liberar espaço.');
+        return;  // ← Impede de abrir o minigame
+      }
+      
+      // Inicia o mini-game se tiver espaço
       startMinigame();
     }
 
@@ -30466,9 +30473,13 @@ GABARITO: A
               messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
               messageEl.innerHTML = 'Treinamento concluído! Voltando ao mapa...';
               if (Math.random() < 0.25) {
-                game.player.potions++;
-                messageEl.innerHTML += '<br>🎁 Você ganhou uma Poção!';
-                saveGame();
+                if (game.player.potions < MAX_POTIONS) {
+                  game.player.potions++;
+                  messageEl.innerHTML += '<br>🎁 Você ganhou uma Poção!';
+                  saveGame();
+                } else {
+                  messageEl.innerHTML += '<br>⚠️ Você encontrou uma Poção, mas seu inventário está cheio!';
+                }
               }
               setTimeout(() => backToMap(), 2000);
             }, 2000);
