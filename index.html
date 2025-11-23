@@ -29570,6 +29570,7 @@ GABARITO: A
             applyPokemonScaleInBattle(document.getElementById('training-opponent-sprite'), game.trainingOpponent.name, false);
             
             updateTrainingDisplay();
+            document.getElementById('training-potion-count').textContent = game.player.potions;
             nextTrainingQuestion();
           } else if (game.battleType === 'gym' && game.currentGym !== null) {
             const gym = gyms[game.currentGym];
@@ -29620,7 +29621,7 @@ GABARITO: A
             document.getElementById('battle-message' + suffix).style.background = 'rgba(0, 0, 0, 0.9)';
 
             updateBattleDisplay();
-            
+            document.getElementById('battle-potion-count' + currentBattleSuffix).textContent = game.player.potions;
             nextBattleQuestion();
           } else if (game.battleType === 'elite' && game.currentElite !== null) {
             const elite = eliteFour[game.currentElite];
@@ -29671,7 +29672,7 @@ GABARITO: A
             document.getElementById('battle-message' + suffix).style.background = 'rgba(0, 0, 0, 0.9)';
 
             updateBattleDisplay();
-            
+            document.getElementById('battle-potion-count' + currentBattleSuffix).textContent = game.player.potions;
             nextBattleQuestion();
           }
         } else {
@@ -31177,10 +31178,29 @@ GABARITO: A
     document.addEventListener('click', function unlockAudio() {
       if (!audioUnlocked) {
         audioUnlocked = true;
+        
+        // Lista de todos os IDs de áudio do jogo
+        const allAudioIds = ['map-music', 'training-music', 'gym-music', 'elite-music'];
+        
+        // Desbloqueia todos os áudios tocando cada um brevemente com volume zero
+        allAudioIds.forEach(audioId => {
+          const audio = document.getElementById(audioId);
+          if (audio) {
+            audio.volume = 0;
+            audio.play().then(() => {
+              audio.pause();
+              audio.currentTime = 0;
+            }).catch(() => {});
+          }
+        });
+        
+        // Agora toca o áudio correto para a tela atual
         if (audioSystem.currentAudio) {
           const audio = document.getElementById(audioSystem.currentAudio);
-          if (audio && audio.paused) {
+          if (audio) {
+            audio.volume = 0;
             audio.play().catch(() => {});
+            audioSystem.fadeIn(audio);
           }
         } else {
           const mapScreen = document.getElementById('map-screen');
