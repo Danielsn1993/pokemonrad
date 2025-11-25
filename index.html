@@ -1286,7 +1286,7 @@
       <h2>💊 POKÉMON CENTER 💊</h2>
       <div class="menu-options">
         <button class="menu-option-btn" onclick="healPokemonFromMenu()">
-          <span class="menu-option-icon"❤️</span>
+          <span class="menu-option-icon">❤️</span>
           <div class="menu-option-text">
             <strong>Curar Pokémon</strong>
             <small>Restaura o HP completamente</small>
@@ -31490,6 +31490,7 @@ GABARITO: A
       event.target.value = '';
     }
 
+    // Corrige alternativas ao girar o celular - VERSÃO MELHORADA
     window.addEventListener('orientationchange', function() {
       setTimeout(function() {
         const buttons = document.querySelectorAll('.answers button');
@@ -31497,8 +31498,41 @@ GABARITO: A
           btn.style.height = 'auto';
           btn.style.minHeight = '50px';
           btn.style.whiteSpace = 'normal';
+          btn.style.wordWrap = 'break-word';
+          btn.style.display = 'block';
+          btn.style.width = '100%';
         });
       }, 100);
+      
+      // Segunda correção após mais tempo (garantia)
+      setTimeout(function() {
+        const buttons = document.querySelectorAll('.answers button');
+        buttons.forEach(btn => {
+          btn.style.height = 'auto';
+          btn.style.minHeight = '50px';
+          btn.style.whiteSpace = 'normal';
+          btn.style.wordWrap = 'break-word';
+          btn.style.display = 'block';
+          btn.style.width = '100%';
+        });
+      }, 500);
+    });
+
+    // Também corrige no resize (backup adicional)
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(function() {
+        const buttons = document.querySelectorAll('.answers button');
+        buttons.forEach(btn => {
+          btn.style.height = 'auto';
+          btn.style.minHeight = '50px';
+          btn.style.whiteSpace = 'normal';
+          btn.style.wordWrap = 'break-word';
+          btn.style.display = 'block';
+          btn.style.width = '100%';
+        });
+      }, 300);
     });
 
   </script>
