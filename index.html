@@ -1286,7 +1286,7 @@
       <h2>💊 POKÉMON CENTER 💊</h2>
       <div class="menu-options">
         <button class="menu-option-btn" onclick="healPokemonFromMenu()">
-          <span class="menu-option-icon">❤️</span>
+          <span class="menu-option-icon"❤️</span>
           <div class="menu-option-text">
             <strong>Curar Pokémon</strong>
             <small>Restaura o HP completamente</small>
@@ -31489,6 +31489,18 @@ GABARITO: A
       
       event.target.value = '';
     }
+
+    window.addEventListener('orientationchange', function() {
+      setTimeout(function() {
+        const buttons = document.querySelectorAll('.answers button');
+        buttons.forEach(btn => {
+          btn.style.height = 'auto';
+          btn.style.minHeight = '50px';
+          btn.style.whiteSpace = 'normal';
+        });
+      }, 100);
+    });
+
   </script>
 </body>
 </html>
