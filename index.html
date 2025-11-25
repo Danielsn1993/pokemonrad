@@ -436,7 +436,6 @@
       font-weight: bold;
       touch-action: manipulation;
       min-height: 44px;
-      transform: translateZ(0);
     }
 
     button:active {
@@ -862,53 +861,6 @@
 
     .image-link:active {
       color: #fff;
-    }
-
-    /* Mantém o jogo na vertical em todas as telas */
-    @media screen and (orientation: landscape) {
-      /* Remove a rotação forçada para desktop/notebook */
-      html {
-        transform: none;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        background: #000;
-      }
-      
-      .container {
-        width: 100%;
-        max-width: 600px;
-        height: 100vh;
-        margin: 0 auto;
-      }
-    }
-
-    /* Força rotação APENAS em dispositivos móveis pequenos */
-    @media screen and (orientation: landscape) and (max-width: 900px) {
-      html {
-        transform: rotate(-90deg);
-        transform-origin: left top;
-        width: 100vh;
-        overflow-x: hidden;
-        position: absolute;
-        top: 100%;
-        left: 0;
-      }
-      
-      body {
-        height: 100vw;
-        width: 100vh;
-        overflow: hidden;
-      }
     }
 
     /* Mini-game Modal */
