@@ -1178,9 +1178,9 @@
   </style>
 </head>
 <body>
-  <div id="image-preview" class="image-preview">
+  <div id="image-preview" class="image-preview" onclick="hideImagePreview()">
     <div class="close-preview" onclick="hideImagePreview()">✕</div>
-    <img id="preview-img" src="" alt="Preview">
+    <img id="preview-img" src="" alt="Preview" onclick="event.stopPropagation()">
   </div>
 
   <div id="explanation-modal" class="explanation-modal" onclick="closeExplanationModal()">
@@ -16398,7 +16398,7 @@ B) A intoxicação por amiodarona é melhor diagnosticada pela ultrassonografia 
 C) A identificação do parênquima hepático com ecogenicidade difusamente aumentada permite a conclusão de esteatose.
 D) A ultrassonografia possui baixa especificidade diagnóstica para o diagnóstico das doenças de depósito.
 E) As hepatites são facilmente identificadas pela ultrassonografia, pela agressão ao hepatocito e formação de esteatose.
-GABARITO: B
+GABARITO: D
 QUESTÃO 1391
 
 Em qual destes nódulos tireoidianos não estaria indicada a PAAF?
