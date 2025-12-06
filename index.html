@@ -825,31 +825,6 @@
       display: block;
     }
 
-    .close-preview {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: #cc0000;
-      color: #fff;
-      border: 2px solid #000;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      touch-action: manipulation;
-      min-height: unset;
-      padding: 0;
-    }
-
-    .close-preview:active {
-      background: #ff0000;
-      transform: scale(1.1);
-    }
-
     .image-link {
       color: #ffcc00;
       text-decoration: underline;
@@ -1179,7 +1154,6 @@
 </head>
 <body>
   <div id="image-preview" class="image-preview" onclick="hideImagePreview()">
-    <div class="close-preview" onclick="hideImagePreview()">✕</div>
     <img id="preview-img" src="" alt="Preview">
   </div>
 
@@ -6798,7 +6772,7 @@ Observe a imagem e assinale a resposta CORRETA:
 
 A) Pode-se afirmar que a estenose da artéria carótida interna é significativa.
 B) A fístula arteriovenosa nos ramos da artéria carótida externa é pouco delimitada porque foi utilizada técnica com baixa dose do meio de contraste.
-C) O tratamento da fístula arteriovenosa da artéria carótida extemna vista neste caso pode ser feito no próprio procedimento de arteriografia.
+C) O tratamento da fístula arteriovenosa da artéria carótida externa vista neste caso pode ser feito no próprio procedimento de arteriografia.
 D) É possível observar estenose da artéria carótida externa e há evidências de malformação arteriovenosa em seus ramos.
 E) O primeiro ramo da artéria carótida externa é a artéria tireóidea superior e há evidências indiretas de fístula vertebrocarotidea.
 GABARITO: A
@@ -25471,13 +25445,13 @@ E) ramo lobar da artéria pulmonar esquerda para o lobo superior.
 GABARITO: B
 QUESTÃO 2283
 
-Lesão renal sólida hipervascularizada, com alto sinal em T2 e queda de sinal intralesional na sequência “fora de fase”, quando comparada com “em fase” da RM e com calcificação na TC. A esse respeito, assinale a alternativa que contém a melhor interpretação do achado e a hipótese diagnóstica, respectivamente.
+Lesão renal sólida hipervascularizada, com alto sinal em T2 e queda de sinal intralesional na sequência “fora de fase”, quando comparada com “em fase” da RM e com calcificação na TC. A esse respeito, assinale a alternativa que contém a melhor hipótese diagnóstica.
 
-A) Angiomiolipoma 
-B) Cisto Complexo 
-C) Carcinoma papilífero 
-D) Carcinoma de células claras 
-E) Oncocitoma
+A) Angiomiolipoma.
+B) Cisto Complexo.
+C) Carcinoma papilífero.
+D) Carcinoma de células claras.
+E) Oncocitoma.
 GABARITO: D
 QUESTÃO 2284
 
@@ -30453,11 +30427,6 @@ GABARITO: A
     }
 
     function startTraining() {
-      document.getElementById('training-potion-btn').disabled = false;
-      document.querySelectorAll('#training-screen button').forEach(btn => {
-        if(btn.textContent.includes('Voltar ao Mapa')) btn.disabled = false;
-      });
-
       document.querySelector('.container').scrollTo({ top: 0, behavior: 'auto' });
 
       const randomPokemon = trainingPokemon[Math.floor(Math.random() * trainingPokemon.length)];
@@ -30546,9 +30515,15 @@ GABARITO: A
         btn.onclick = () => checkTrainingAnswer(ans, currentTrainingQuestion.answer, currentTrainingQuestion.index);
         answersDiv.appendChild(btn);
       });
+      
+      // ✅ HABILITA O BOTÃO DE POÇÃO AQUI (quando nova pergunta é gerada)
+      document.getElementById('training-potion-btn').disabled = false;
     }
 
     function checkTrainingAnswer(selected, correct, questionIndex) {
+      // ✅ DESABILITA O BOTÃO DE POÇÃO IMEDIATAMENTE (quando alternativa é clicada)
+      document.getElementById('training-potion-btn').disabled = true;
+
       const messageEl = document.getElementById('training-message');
       const answersDiv = document.getElementById('training-answers');
       answersDiv.querySelectorAll('button').forEach(btn => btn.disabled = true);
@@ -30676,13 +30651,6 @@ GABARITO: A
     }
 
     function trainingOpponentAttack() {
-
-      // ADICIONAR ESTAS LINHAS NO INÍCIO:
-      document.getElementById('training-potion-btn').disabled = true;
-      document.querySelectorAll('#training-screen button').forEach(btn => {
-        if(btn.textContent.includes('Voltar ao Mapa')) btn.disabled = true;
-      });
-
       const messageEl = document.getElementById('training-message');
 
       // Calcula dano com base na diferença de nível
@@ -30720,13 +30688,6 @@ GABARITO: A
       setTimeout(() => {
         messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
         currentTrainingQuestion = null;
-
-        // ADICIONAR ESTAS LINHAS ANTES DE nextTrainingQuestion():
-        document.getElementById('training-potion-btn').disabled = false;
-        document.querySelectorAll('#training-screen button').forEach(btn => {
-          if(btn.textContent.includes('Voltar ao Mapa')) btn.disabled = false;
-        });
-
         nextTrainingQuestion();
       }, 1500);
     }
@@ -30954,9 +30915,14 @@ GABARITO: A
         const btn = document.createElement('button');
         btn.textContent = ans;
         btn.onclick = () => checkBattleAnswer(ans, currentBattleQuestion.answer, currentBattleQuestion.index);
-        btn.disabled = disableDuringSwitch;  // ← APENAS as alternativas
+        btn.disabled = disableDuringSwitch;
         answersDiv.appendChild(btn);
       });
+      
+      // ✅ HABILITA O BOTÃO DE POÇÃO (exceto durante troca de Pokémon)
+      if (!disableDuringSwitch) {
+        document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
+      }
     }
 
     function checkBattleAnswer(selected, correct, questionIndex) {
@@ -31263,10 +31229,6 @@ GABARITO: A
     }
 
     function opponentAttack() {
-  
-      // ADICIONAR ESTAS LINHAS NO INÍCIO:
-      document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = true;
-
       const messageEl = document.getElementById('battle-message' + currentBattleSuffix);
 
       // Calcula dano com base na diferença de nível
@@ -31304,10 +31266,6 @@ GABARITO: A
       
       setTimeout(() => {
         messageEl.style.background = 'rgba(0, 0, 0, 0.9)';
-
-        // ADICIONAR ESTA LINHA ANTES DE nextBattleQuestion():
-        document.getElementById('battle-potion-btn' + currentBattleSuffix).disabled = false;
-
         nextBattleQuestion();
       }, 1500);
     }
