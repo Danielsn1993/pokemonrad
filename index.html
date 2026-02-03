@@ -1239,7 +1239,7 @@
           <span class="menu-option-icon">🧪</span>
           <div class="menu-option-text">
             <strong>Conseguir Poções</strong>
-            <small>Jogue o minigame (apenas com 0 poções)</small>
+            <small>Jogue o minigame</small>
           </div>
         </button>
       </div>
@@ -30897,7 +30897,7 @@ GABARITO: E
     function updatePotionButtonState() {
       const potionBtn = document.getElementById('potion-minigame-btn');
       
-      if (game.player.potions > 3) {
+      if (game.player.potions > 2) {
         potionBtn.disabled = true;
         potionBtn.style.opacity = '0.5';
         potionBtn.querySelector('small').textContent = `Você já conseguiu 3 poções pelo minigame! O restante terá que ser obtido na área de treino, ao derrotar pokemons selvagens.`;
@@ -30930,7 +30930,7 @@ GABARITO: E
     // Inicia o minigame de poções do menu
     function startPotionMinigame() {
       // Verifica se o jogador tem alguma poção
-      if (game.player.potions > 3) {
+      if (game.player.potions > 2) {
         alert('❌ Você já tem 3 poções!\n\nVocê só pode jogar o minigame quando tiver menos de 3 poções.');
         return;
       }
