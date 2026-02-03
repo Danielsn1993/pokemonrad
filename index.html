@@ -30930,8 +30930,8 @@ GABARITO: E
     // Inicia o minigame de poções do menu
     function startPotionMinigame() {
       // Verifica se o jogador tem alguma poção
-      if (game.player.potions > 0) {
-        alert('❌ Você já tem poções! (Quantidade atual: ' + game.player.potions + ')\n\nVocê só pode jogar o minigame quando tiver 0 poções.\n\nUse suas poções em batalha primeiro!');
+      if (game.player.potions > 3) {
+        alert('❌ Você já tem 3 poções!\n\nVocê só pode jogar o minigame quando tiver menos de 3 poções.');
         return;
       }
       
