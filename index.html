@@ -12692,7 +12692,7 @@ E) Possui origem na crista neural, sendo o diagnóstico provável o neuroblastom
 GABARITO: E
 QUESTÃO 1025
 
-Assinale a alternativa que indique achado ultrassonográfico compatível com apendicite aguda:
+Assinale a alternativa que indique o achado ultrassonográfico compatível com apendicite aguda:
 
 A) Ausência de calcificação na luz do apêndice.
 B) Colabamento à compressão.
@@ -14636,7 +14636,7 @@ E) Lipoma.
 GABARITO: B
 QUESTÃO 1217
 https://s3.amazonaws.com/brainscape-prod/system/cm/627/021/817/q_image_ios.?1757505186
-Considere uma primigesta com gestação de evolução normal, 37 anos de idade, com 37 semanas de gestação. Não foi realizada Doppler velocimetria anterior. Feto com peso estimado no percentil 15. Líquido amniótico de volume normal e placenta grau 1 de Grannum. Doppler da artéria cerebral média mostrando IR de 0,64 e IP de 1,11, e Doppler da artéria umbilical mostrando IR de 0,73 e IP de 1,24, conforme demonstrado nas imagem a seguir. Baseado nessas informações e na análise dessas imagens, assinale a alternativa que apresenta o diagnóstico provável e a conduta mais adequada.
+Considere uma primigesta com gestação de evolução normal, 37 anos de idade, com 37 semanas de gestação. Não foi realizada dopplervelocimetria anterior. Feto com peso estimado no percentil 15. Líquido amniótico de volume normal e placenta grau 1 de Grannum. Doppler da artéria cerebral média mostrando IR de 0,64 e IP de 1,11, e Doppler da artéria umbilical mostrando IR de 0,73 e IP de 1,24, conforme demonstrado nas imagens a seguir. Baseado nessas informações e na análise dessas imagens, assinale a alternativa que apresenta o diagnóstico provável e a conduta mais adequada.
 
 A) Trata-se de gestação de evolução normal, uma vez que a relação umbílico-cerebral está abaixo de 1,0, e o feto está acima do percentil 10, indicado controle de rotina.
 B) Centralização de fluxo com diagnóstico de insuficiência placentária tardia, sendo indicada interrupção da gestação.
@@ -30900,7 +30900,7 @@ GABARITO: E
       if (game.player.potions > 2) {
         potionBtn.disabled = true;
         potionBtn.style.opacity = '0.5';
-        potionBtn.querySelector('small').textContent = `Você já conseguiu 3 poções pelo minigame! O restante terá que ser obtido na área de treino, ao derrotar pokemons selvagens.`;
+        potionBtn.querySelector('small').textContent = `Você já tem 3 ou mais poções! O restante terá que ser obtido na área de treino, ao derrotar pokemons selvagens.`;
       } else {
         potionBtn.disabled = false;
         potionBtn.style.opacity = '1';
@@ -31588,11 +31588,11 @@ GABARITO: E
               messageEl.innerHTML = 'Treinamento concluído! Voltando ao mapa...';
               if (Math.random() < 0.25) {
                 if (game.player.potions < MAX_POTIONS) {
-                  game.player.potions++;
-                  messageEl.innerHTML += '<br>🎁 Você ganhou uma Poção!';
+                  game.player.potions = MAX_POTIONS;
+                  messageEl.innerHTML += '<br>🎁 Você ganhou um presente! Suas poções foram completamente reabastecidas!';
                   saveGame();
                 } else {
-                  messageEl.innerHTML += '<br>⚠️ Você encontrou uma Poção, mas seu inventário está cheio!';
+                  messageEl.innerHTML += '<br>⚠️ Você encontrou um presente, mas seu inventário já está cheio!';
                 }
               }
               setTimeout(() => backToMap(), 2000);
